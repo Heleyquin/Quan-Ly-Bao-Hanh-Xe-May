@@ -2,7 +2,7 @@ package com.raven.model;
 
 import javax.swing.Icon;
 
-public class Model_Card {
+public class Nhan_Vien {
 
     public Icon getIcon() {
         return icon;
@@ -66,7 +66,7 @@ public class Model_Card {
     public void setNgayNghi(String ngayNghi){
         this.ngayNghi = ngayNghi;
     }
-    public Model_Card(Icon icon, String ten, String email, String ngaySinh, String sdt, String gioi, String ngayVao, String ngayNghi, String description) {
+    public Nhan_Vien(Icon icon, String ten, String email, String ngaySinh, String sdt, String gioi, String ngayVao, String ngayNghi, String description) {
         this.icon = icon;
         this.ten = ten;
         this.email = email;
@@ -78,7 +78,7 @@ public class Model_Card {
         this.description = description;
     }
 
-    public Model_Card() {
+    public Nhan_Vien() {
     }
 
     private Icon icon;

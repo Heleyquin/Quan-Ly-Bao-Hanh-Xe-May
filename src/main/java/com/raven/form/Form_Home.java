@@ -1,22 +1,37 @@
 package com.raven.form;
 
-import com.raven.model.Model_Card;
+import com.mycompany.warranty.WelcomeJFrame;
+import com.raven.main.Main;
+import com.raven.model.Nhan_Vien;
+import connectToSQL.connectSQL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 public class Form_Home extends javax.swing.JPanel {
 
+    private static connectSQL conn;
     public Form_Home() {
         initComponents();
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), "Name Here", "CCCD", "Ngày Sinh", "Số điện thoại", "Giới tính", "Ngày vào", "Ngày nghỉ", "Increased by 60%"));
-        //  add row table
-        JPanel p = new JPanel();
-        p.setBackground(getBackground());
+        conn = new connectSQL();
+        WelcomeJFrame welcom = new WelcomeJFrame();
+        String tk = welcom.getTK();
+        ResultSet rs = conn.timnv_bang_tk(tk);
+        String name = null, email = null, SDT = null, gioi = null, ngaySinh = null, ngayVaoLam = null;
+        try {
+            name = rs.getString(2) + " " + rs.getString(3);
+            ngaySinh = rs.getString(4);
+            SDT = rs.getString(5);
+            email = rs.getString(6);
+            gioi = rs.getString("Gioi");
+            ngayVaoLam = rs.getString("TgVao");
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        card1.setData(new Nhan_Vien(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), name, email, ngaySinh, SDT, gioi, ngayVaoLam, "------------", "Increased by 60%"));
     }
 
-    public void setCardForm_Home(String name, String email, String NgaySinh, String SDT, String Gioi, String NgayVaoLam){
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), name, email, NgaySinh, SDT, Gioi, NgayVaoLam, "-----------------", "Increased by 60%"));
-        
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,7 +69,7 @@ public class Form_Home extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.component.Card card1;
+    private static com.raven.component.Card card1;
     private javax.swing.JLayeredPane panel;
     // End of variables declaration//GEN-END:variables
 }

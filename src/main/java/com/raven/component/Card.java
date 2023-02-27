@@ -1,6 +1,6 @@
 package com.raven.component;
 
-import com.raven.model.Model_Card;
+import com.raven.model.Nhan_Vien;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -35,7 +35,7 @@ public class Card extends javax.swing.JPanel {
         color2 = Color.WHITE;
     }
 
-    public void setData(Model_Card data) {
+    public void setData(Nhan_Vien data) {
         lbIcon.setIcon(data.getIcon());
         lbName.setText(data.getName());
         lbCCCD.setText(data.getMail());

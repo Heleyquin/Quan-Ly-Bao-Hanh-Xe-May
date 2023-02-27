@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class connectSQL {
     private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
@@ -17,7 +19,6 @@ public class connectSQL {
     private static String PASSWORD = "123456";
     Connection conn;
     public connectSQL(){
-        // Create a variable for the connection string.
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
@@ -52,7 +53,6 @@ public class connectSQL {
             rs = cs.executeQuery();
             rs.next();
             result = rs.getInt(1);
-            return result;
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
@@ -71,5 +71,40 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return rs;
+    }
+    public ResultSet ds_pbh_nhan(){
+        String SQL = "select * From xem_ds_nhan_bh";
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet qua_trinh_bh(String id_nhan){
+        String SQL = "{call sp_qua_trinh_bh(?)}";
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, id_nhan);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    
+    public void close(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
     }
 }

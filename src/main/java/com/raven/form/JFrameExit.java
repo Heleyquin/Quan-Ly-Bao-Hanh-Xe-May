@@ -4,7 +4,6 @@ package com.raven.form;
 import com.mycompany.warranty.WelcomeJFrame;
 import com.raven.main.Main;
 import java.awt.Color;
-import com.raven.form.QuanLyBaoHanh;
 public class JFrameExit extends javax.swing.JFrame {
 
     public JFrameExit() {
@@ -227,6 +226,7 @@ public class JFrameExit extends javax.swing.JFrame {
         WelcomeJFrame welcomFrame = new WelcomeJFrame();
         Main main = new Main();
         QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
+//        QLBH.reset();
         welcomFrame.showWelcome();
         main.hideMain();
         main.reset();
@@ -238,6 +238,7 @@ public class JFrameExit extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JFrameExit().setVisible(true);
             }

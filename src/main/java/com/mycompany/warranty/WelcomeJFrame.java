@@ -7,6 +7,7 @@ import connectToSQL.connectSQL;
 public class WelcomeJFrame extends javax.swing.JFrame {
 
     static WelcomeJFrame welcom = new WelcomeJFrame();
+    private static String tk;
     public WelcomeJFrame() {
         initComponents();
     }
@@ -238,16 +239,22 @@ public class WelcomeJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setTK(){
+        tk = TaiKhoan.getText();
+    }
+    public String getTK(){
+        return tk;
+    }
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        String tk = TaiKhoan.getText();
+        welcom.setTK();
         String mk = String.copyValueOf(MatKhau.getPassword());
         connectSQL conn = new connectSQL();
         int result = conn.timTk(tk, mk);
         if (result == 1){
             welcom.hideWelcome();
             Main mainScreen = new Main();
-            mainScreen.showMain(tk);
+            mainScreen.showMain();
         }
         else{
             TaiKhoan.setText(null);

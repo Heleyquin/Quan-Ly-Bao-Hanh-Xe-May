@@ -10,11 +10,6 @@ import com.raven.form.Form_Home;
 import com.raven.form.JFrameExit;
 import java.awt.Color;
 import javax.swing.JComponent;
-import connectToSQL.connectSQL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -29,11 +24,9 @@ public class Main extends javax.swing.JFrame {
     private JFrameExit form5;
     static Main main = new Main();
     static int status = 0;//Lưu trạng thai của form, 0 là Form QLBH, 1 là Form CTBH
-    private connectSQL conn;
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        conn = new connectSQL();
         home = new Form_Home();
         form1 = new QuanLyBaoHanh();
         form12 = new CTBH_JPanel();
@@ -49,10 +42,10 @@ public class Main extends javax.swing.JFrame {
                     main.setForm(home);
                 } else if (index == 1) {
                     if (main.getStatus() == 0){
-                        main.setForm(form1.getQLBH());
+                        main.setForm(form1);
                     }
                     else if(main.getStatus() == 1){
-                        main.setForm(form12.getCTBH());
+                        main.setForm(form12);
                     }
                 } else if (index == 2) {
                     main.setForm(form2);
@@ -168,23 +161,9 @@ public class Main extends javax.swing.JFrame {
     public void setStatus(int status){
         this.status = status;
     }
-    public void showMain(String tk){
-        main.setVisible(true);
-        main.setSize(1180, 657);
-        ResultSet rs = conn.timnv_bang_tk(tk);
-        String name =null, email = null, ngaySinh =null, SDT =null, gioi=null, ngayVaoLam = null;
-        try {
-            name = rs.getString(2) + rs.getString(3);
-            ngaySinh = rs.getString(4);
-            SDT = rs.getString(5);
-            email = rs.getString(6);
-            gioi = rs.getString("Gioi");
-            ngayVaoLam = rs.getString("TgVao");
-        } catch (SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        home.setCardForm_Home(name, email, ngaySinh, SDT, gioi, ngayVaoLam);
+    public void showMain(){
         main.setForm(home);
+        main.setVisible(true);
     }
     public void hideMain(){
         main.setVisible(false);

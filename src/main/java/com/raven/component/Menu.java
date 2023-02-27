@@ -11,11 +11,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
-
+import com.mycompany.warranty.WelcomeJFrame;
+import connectToSQL.connectSQL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+        
 public class Menu extends javax.swing.JPanel {
 
     private EventMenuSelected event;
-
+    private WelcomeJFrame welcom;
+    private connectSQL conn;
+    
     public void addEventMenuSelected(EventMenuSelected event) {
         this.event = event;
         listMenu1.addEventMenuSelected(event);
@@ -29,21 +37,27 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
+        welcom = new WelcomeJFrame();
+        conn = new connectSQL();
+        String tk = welcom.getTK();
+        ResultSet rs = conn.timnv_bang_tk(tk);
+        String name = null;
+        try {
+            name = rs.getString("Ho") + " " + rs.getString("Ten");
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        nameLabel.setText(name);
         listMenu1.addItem(new Model_Menu("1", "Thông tin người dùng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Quản lí bảo hành", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Quản lí khách hàng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("4", "Cập nhật thông tin bảo hành", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("5", "", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-//
-//        listMenu1.addItem(new Model_Menu("", "My Data", Model_Menu.MenuType.TITLE));
-//        listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
-//        listMenu1.addItem(new Model_Menu("6", "Icons", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("7", "Sample Page", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("8", "Extra", Model_Menu.MenuType.MENU));
-//        listMenu1.addItem(new Model_Menu("9", "More", Model_Menu.MenuType.MENU));
+
         listMenu1.addItem(new Model_Menu("10", "Exit", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -51,30 +65,26 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         panelMoving = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
         listMenu1 = new com.raven.swing.ListMenu<>();
 
         panelMoving.setOpaque(false);
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/kdmmaleuser_user_person_man_5919.png"))); // NOI18N
-        jLabel1.setText("Name Here");
+        nameLabel.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        nameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        nameLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/kdmmaleuser_user_person_man_5919.png"))); // NOI18N
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
         panelMovingLayout.setHorizontalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMovingLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
         panelMovingLayout.setVerticalGroup(
             panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMovingLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -126,8 +136,8 @@ public class Menu extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private com.raven.swing.ListMenu<String> listMenu1;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JPanel panelMoving;
     // End of variables declaration//GEN-END:variables
 }

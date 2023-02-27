@@ -24,8 +24,8 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="238" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="237" max="32767" attributes="0"/>
                       <Component id="header1" min="-2" pref="549" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -37,9 +37,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="header1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="336" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="348" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,12 +60,13 @@
               <Color blue="ff" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="50">
-                <Column editable="false" title="M&#xe3; th&#x1ebb; b&#x1ea3;o h&#xe0;nh" type="java.lang.Object"/>
-                <Column editable="false" title="Nh&#xe2;n vi&#xea;n ti&#x1ebf;p nh&#x1ead;n" type="java.lang.Object"/>
-                <Column editable="false" title="Ng&#xe0;y ti&#x1ebf;p nh&#x1ead;n" type="java.lang.Object"/>
-                <Column editable="false" title="Nh&#xe2;n vi&#xea;n tr&#x1ea3;" type="java.lang.Object"/>
-                <Column editable="false" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="M&#xe3; phi&#x1ebf;u nh&#x1ead;n" type="java.lang.String"/>
+                <Column editable="false" title="M&#xe3; th&#x1ebb; b&#x1ea3;o h&#xe0;nh" type="java.lang.String"/>
+                <Column editable="false" title="Nh&#xe2;n vi&#xea;n nh&#x1ead;n" type="java.lang.String"/>
+                <Column editable="false" title="Ng&#xe0;y ti&#x1ebf;p nh&#x1ead;n" type="java.lang.String"/>
+                <Column editable="false" title="Nh&#xe2;n vi&#xea;n tr&#x1ea3;" type="java.lang.String"/>
+                <Column editable="false" title="Ng&#xe0;y tr&#x1ea3;" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="colorFilasBackgound1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -74,8 +75,13 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    if (e.getClickCount() == 2) {&#xa;                        Main main = new Main();&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        CTBH.reset();&#xa;                        main.getMain().setForm(CTBH.getCTBH());&#xa;                        main.setStatus(1);&#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String id_nhan = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatus(1);&#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

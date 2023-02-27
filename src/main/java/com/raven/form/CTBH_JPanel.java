@@ -2,12 +2,18 @@
 package com.raven.form;
 
 import com.raven.main.Main;
+import connectToSQL.connectSQL;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,103 +21,68 @@ import javax.swing.ListSelectionModel;
  */
 public class CTBH_JPanel extends javax.swing.JPanel {
 
-    static CTBH_JPanel CTBH = new CTBH_JPanel();
     public CTBH_JPanel() {
         initComponents();
+        this.insertTable("1");
     }
 
-    public CTBH_JPanel getCTBH(){
-        return CTBH;
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        MoTa = new javax.swing.JLabel();
         header1 = new com.raven.component.Header();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableMetro1 = new rojeru_san.complementos.TableMetro();
+        tableQuaTrinhBH = new rojeru_san.complementos.TableMetro();
         backButton = new RSComponentShade.RSButtonShade();
 
         setBackground(new java.awt.Color(102, 255, 255));
 
-        tableMetro1.setBackground(new java.awt.Color(153, 255, 255));
-        tableMetro1.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 0));
+        jLabel1.setText("Yêu cầu");
+
+        MoTa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MoTa.setForeground(new java.awt.Color(255, 255, 255));
+        MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        tableQuaTrinhBH.setBackground(new java.awt.Color(153, 255, 255));
+        tableQuaTrinhBH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Thời gian", "Mô Tả"
+                "Nhân viên thực hiện", "Mô Tả", "Thời gian"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableMetro1.setColorFilasBackgound1(new java.awt.Color(255, 255, 204));
-        tableMetro1.setColorFilasBackgound2(new java.awt.Color(204, 255, 255));
-        tableMetro1.setFocusable(false);
-        tableMetro1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tableMetro1.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tableMetro1.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tableMetro1.setGridColor(new java.awt.Color(153, 255, 255));
-        tableMetro1.setPreferredSize(new java.awt.Dimension(945, 1530));
-        tableMetro1.setRowHeight(30);
-        tableMetro1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tableMetro1);
-        tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableQuaTrinhBH.setColorFilasBackgound1(new java.awt.Color(255, 255, 204));
+        tableQuaTrinhBH.setColorFilasBackgound2(new java.awt.Color(204, 255, 255));
+        tableQuaTrinhBH.setFocusable(false);
+        tableQuaTrinhBH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tableQuaTrinhBH.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tableQuaTrinhBH.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tableQuaTrinhBH.setGridColor(new java.awt.Color(153, 255, 255));
+        tableQuaTrinhBH.setPreferredSize(new java.awt.Dimension(945, 1530));
+        tableQuaTrinhBH.setRowHeight(30);
+        tableQuaTrinhBH.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tableQuaTrinhBH);
+        tableQuaTrinhBH.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         backButton.setBackground(new java.awt.Color(153, 255, 255));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/goback2.png"))); // NOI18N
@@ -132,10 +103,19 @@ public class CTBH_JPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                         .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(3, 3, 3))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(100, Short.MAX_VALUE)
+                    .addComponent(MoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,17 +123,23 @@ public class CTBH_JPanel extends javax.swing.JPanel {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(60, 60, 60)
+                    .addComponent(MoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(339, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
-        QLBH.reset();
         Main main = new Main();
         main.getMain().setForm(QLBH);
         main.setStatus(0);
@@ -170,14 +156,29 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
-    public static void reset(){
-        CTBH = new CTBH_JPanel();
-        System.gc();
+    public void insertTable(String id_nhan){
+        connectSQL conn = new connectSQL();
+        ResultSet rs;
+        DefaultTableModel dT = (DefaultTableModel) tableQuaTrinhBH.getModel();
+        try {
+            rs = conn.qua_trinh_bh(id_nhan);
+            rs.next();
+            MoTa.setText(rs.getString(1));
+            dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
+            while(rs.next()){
+                dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CTBH_JPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel MoTa;
     private RSComponentShade.RSButtonShade backButton;
     private com.raven.component.Header header1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private rojeru_san.complementos.TableMetro tableMetro1;
+    private rojeru_san.complementos.TableMetro tableQuaTrinhBH;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,17 +10,22 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ListSelectionModel;
 import com.raven.main.Main;
-import com.raven.form.CTBH_JPanel;
-
+import connectToSQL.connectSQL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author RAVEN
  */
 public class QuanLyBaoHanh extends javax.swing.JPanel {
 
-    static QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
     public QuanLyBaoHanh() {
         initComponents();
+        this.insertTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,64 +41,22 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         tableMetro1.setBackground(new java.awt.Color(153, 255, 255));
         tableMetro1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Mã thẻ bảo hành", "Nhân viên tiếp nhận", "Ngày tiếp nhận", "Nhân viên trả", "Trạng thái"
+                "Mã phiếu nhận", "Mã thẻ bảo hành", "Nhân viên nhận", "Ngày tiếp nhận", "Nhân viên trả", "Ngày trả"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -113,11 +76,13 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableMetro1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
+                int indexRow = tableMetro1.rowAtPoint(e.getPoint());
+                if (e.getClickCount() == 2 && indexRow >= 0) {
+                    JTable tableTemp = (JTable)e.getSource();
+                    String id_nhan = tableTemp.getModel().getValueAt(indexRow, 0)+"";
                     Main main = new Main();
                     CTBH_JPanel CTBH = new CTBH_JPanel();
-                    CTBH.reset();
-                    main.getMain().setForm(CTBH.getCTBH());
+                    main.getMain().setForm(CTBH);
                     main.setStatus(1);
                 }
             }
@@ -130,8 +95,8 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 238, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(237, Short.MAX_VALUE)
                         .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -139,15 +104,12 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public QuanLyBaoHanh getQLBH(){
-        return QLBH;
-    }
     @Override
     protected void paintChildren(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -158,9 +120,27 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         g2.fillRect(getWidth(), 0, getWidth(), getHeight());
         super.paintChildren(grphcs);
     }
-    public static void reset(){
-        QLBH = new QuanLyBaoHanh();
-        System.gc();
+
+    public void insertTable(){
+//        Vector<Nhan_BH> ds_bh = new Vector<>();
+        DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+        connectSQL conn = new connectSQL();
+        ResultSet rs = conn.ds_pbh_nhan();
+        try {
+            while(rs.next()){
+//                Nhan_BH temp = new Nhan_BH();
+                dT.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+//                temp.setMaTBH(rs.getString(1));
+//                temp.setMaNVNhan(rs.getString(2));
+//                temp.setNgayTiepNhan(rs.getString(3));
+//                temp.setMaNVTra(rs.getString(4));
+//                temp.setNgayTra(rs.getString(5));
+//                ds_bh.add(temp);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyBaoHanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.component.Header header1;
