@@ -1,12 +1,11 @@
 
-package com.mycompany.warranty;
+package com.raven.component;
 
 import com.raven.main.Main;
 import connectToSQL.connectSQL;
 
 public class WelcomeJFrame extends javax.swing.JFrame {
 
-    static WelcomeJFrame welcom = new WelcomeJFrame();
     private static String tk;
     public WelcomeJFrame() {
         initComponents();
@@ -117,11 +116,6 @@ public class WelcomeJFrame extends javax.swing.JFrame {
         TaiKhoan.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ACCOUNT_CIRCLE);
         TaiKhoan.setPhColor(new java.awt.Color(0, 0, 0));
         TaiKhoan.setPlaceholder("Tài khoản");
-        TaiKhoan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TaiKhoanActionPerformed(evt);
-            }
-        });
 
         MatKhau.setForeground(new java.awt.Color(0, 0, 0));
         MatKhau.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -241,18 +235,19 @@ public class WelcomeJFrame extends javax.swing.JFrame {
 
     public void setTK(){
         tk = TaiKhoan.getText();
+        System.out.println(TaiKhoan.getText());
     }
     public String getTK(){
         return tk;
     }
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        welcom.setTK();
+        this.setTK();
         String mk = String.copyValueOf(MatKhau.getPassword());
         connectSQL conn = new connectSQL();
         int result = conn.timTk(tk, mk);
         if (result == 1){
-            welcom.hideWelcome();
+            this.hideWelcome();
             Main mainScreen = new Main();
             mainScreen.showMain();
         }
@@ -265,55 +260,48 @@ public class WelcomeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginActionPerformed
 
     public void showWelcome(){
-        welcom.setVisible(true);
+        this.setVisible(true);
     }
     public void hideWelcome(){
-        welcom.setVisible(false);
-        welcom = new WelcomeJFrame();
-        welcom.setLocationRelativeTo(null);
-        System.gc();
+        this.dispose();
     }
-    private void TaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaiKhoanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TaiKhoanActionPerformed
-
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-                welcom.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                welcom.setLocationRelativeTo(null);
-                welcom.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(WelcomeJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                
+//                welcom.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//                welcom.setLocationRelativeTo(null);
+//                welcom.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ChaoMung;

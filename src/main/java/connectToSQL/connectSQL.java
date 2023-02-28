@@ -7,8 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class connectSQL {
     private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
@@ -99,6 +97,32 @@ public class connectSQL {
         return rs;
     }
     
+    public ResultSet ds_kh(){
+        String SQL = "SELECT * FROM KhachHang";
+        Statement st;
+        ResultSet rs = null;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet sp_ct_kh(String makh){
+        String SQL = "{call sp_ct_kh(?)}";
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, makh);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
     
     public void close(){
         try {

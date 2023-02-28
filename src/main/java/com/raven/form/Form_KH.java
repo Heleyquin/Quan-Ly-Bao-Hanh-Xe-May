@@ -1,6 +1,8 @@
 
 package com.raven.form;
 
+import com.raven.main.Main;
+import connectToSQL.connectSQL;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -8,25 +10,19 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ListSelectionModel;
-import com.raven.main.Main;
-import connectToSQL.connectSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author RAVEN
- */
-public class QuanLyBaoHanh extends javax.swing.JPanel {
 
-    private static String id_nhan;
-    public QuanLyBaoHanh() {
+public class Form_KH extends javax.swing.JPanel {
+
+    public Form_KH() {
         initComponents();
-        this.insertTable();
+        this.insertKH();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,7 +33,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMetro1 = new rojeru_san.complementos.TableMetro();
 
-        setBackground(new java.awt.Color(102, 255, 255));
+        setBackground(new java.awt.Color(153, 255, 255));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -47,14 +43,14 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã phiếu nhận", "Mã thẻ bảo hành", "Nhân viên nhận", "Ngày tiếp nhận", "Nhân viên trả", "Ngày trả"
+                "Mã khách hàng", "CCCD", "Họ Tên", "Ngày sinh", "Số điện thoại", "Giới tính", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -82,12 +78,12 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                 int indexRow = tableMetro1.rowAtPoint(e.getPoint());
                 if (e.getClickCount() == 2 && indexRow >= 0) {
                     JTable tableTemp = (JTable)e.getSource();
-                    String temp = tableTemp.getModel().getValueAt(indexRow, 0)+"";
+                    String makh = tableTemp.getModel().getValueAt(indexRow, 0)+"";
                     Main main = new Main();
-                    id_nhan = temp;
-                    CTBH_JPanel CTBH = new CTBH_JPanel();
-                    main.getMain().setForm(CTBH);
-                    main.setStatusBH(1);
+                    Form_CTKH CTKH = new Form_CTKH();
+                    CTKH.insertCTKH(makh);
+                    main.getMain().setForm(CTKH);
+                    main.setStatusKH(1);
                 }
             }
         });
@@ -100,7 +96,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(237, Short.MAX_VALUE)
+                        .addContainerGap(242, Short.MAX_VALUE)
                         .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -109,39 +105,40 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setId_nhan(String id_nhan){
-        this.id_nhan = id_nhan;
-    }
-    public String getId_nhan(){
-        return id_nhan;
-    }
     @Override
     protected void paintChildren(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint g = new GradientPaint(0, 0, Color.decode("#00C9FF"), 0, getHeight(), Color.decode("#92FE9D"));
+        GradientPaint g = new GradientPaint(0, 0, Color.decode("#86A8E7"), 0, getHeight(), Color.decode("#91EAE4"));
         g2.setPaint(g);
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         g2.fillRect(getWidth(), 0, getWidth(), getHeight());
         super.paintChildren(grphcs);
     }
 
-    public void insertTable(){
-//        Vector<Nhan_BH> ds_bh = new Vector<>();
+    public void insertKH(){
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         connectSQL conn = new connectSQL();
-        ResultSet rs = conn.ds_pbh_nhan();
+        ResultSet rs = conn.ds_kh();
+        String maKH = null, cCCD = null, ten = null, ngaySinh = null, email = null, sdt = null, gioi = null;
         try {
             while(rs.next()){
-                dT.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                maKH = rs.getString("MaKH");
+                cCCD =rs.getString("CCCD");
+                ten = rs.getString("Ho") + " " + rs.getString("Ten");
+                ngaySinh = rs.getString("NgaySinh");
+                sdt = rs.getString("SDT");
+                email = rs.getString("Email");
+                gioi = rs.getString("Gioi");
+                dT.addRow(new Object[] {maKH, cCCD, ten, ngaySinh, sdt, email, gioi});
             }
         } catch (SQLException ex) {
-            Logger.getLogger(QuanLyBaoHanh.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Form_KH.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

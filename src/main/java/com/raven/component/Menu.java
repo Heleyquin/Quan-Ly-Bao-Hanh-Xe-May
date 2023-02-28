@@ -1,5 +1,6 @@
 package com.raven.component;
 
+import com.mycompany.warranty.main;
 import com.raven.event.EventMenuSelected;
 import com.raven.model.Model_Menu;
 import java.awt.Color;
@@ -11,7 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
-import com.mycompany.warranty.WelcomeJFrame;
 import connectToSQL.connectSQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 public class Menu extends javax.swing.JPanel {
 
     private EventMenuSelected event;
-    private WelcomeJFrame welcom;
     private connectSQL conn;
     
     public void addEventMenuSelected(EventMenuSelected event) {
@@ -37,9 +36,8 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
-        welcom = new WelcomeJFrame();
         conn = new connectSQL();
-        String tk = welcom.getTK();
+        String tk = main.tk;
         ResultSet rs = conn.timnv_bang_tk(tk);
         String name = null;
         try {

@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="66" type="rgb"/>
+      <Color blue="ff" green="ff" red="99" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -21,11 +21,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="237" max="32767" attributes="0"/>
+                      <EmptySpace pref="242" max="32767" attributes="0"/>
                       <Component id="header1" min="-2" pref="549" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -38,7 +38,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="header1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="361" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="313" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -65,13 +65,14 @@
               <Color blue="ff" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
-                <Column editable="false" title="M&#xe3; phi&#x1ebf;u nh&#x1ead;n" type="java.lang.String"/>
-                <Column editable="false" title="M&#xe3; th&#x1ebb; b&#x1ea3;o h&#xe0;nh" type="java.lang.String"/>
-                <Column editable="false" title="Nh&#xe2;n vi&#xea;n nh&#x1ead;n" type="java.lang.String"/>
-                <Column editable="false" title="Ng&#xe0;y ti&#x1ebf;p nh&#x1ead;n" type="java.lang.String"/>
-                <Column editable="false" title="Nh&#xe2;n vi&#xea;n tr&#x1ea3;" type="java.lang.String"/>
-                <Column editable="false" title="Ng&#xe0;y tr&#x1ea3;" type="java.lang.String"/>
+              <Table columnCount="7" rowCount="0">
+                <Column editable="false" title="M&#xe3; kh&#xe1;ch h&#xe0;ng" type="java.lang.String"/>
+                <Column editable="false" title="CCCD" type="java.lang.String"/>
+                <Column editable="false" title="H&#x1ecd; T&#xea;n" type="java.lang.String"/>
+                <Column editable="false" title="Ng&#xe0;y sinh" type="java.lang.String"/>
+                <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.String"/>
+                <Column editable="false" title="Gi&#x1edb;i t&#xed;nh" type="java.lang.String"/>
+                <Column editable="false" title="Email" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="colorFilasBackgound1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -80,8 +81,13 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String makh = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        Form_CTKH CTKH = new Form_CTKH();&#xa;                        CTKH.insertCTKH(makh);&#xa;                        main.getMain().setForm(CTKH);&#xa;                        main.setStatusKH(1);&#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

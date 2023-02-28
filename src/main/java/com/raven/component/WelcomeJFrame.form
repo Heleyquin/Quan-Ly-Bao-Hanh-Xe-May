@@ -334,9 +334,6 @@
                 </Property>
                 <Property name="placeholder" type="java.lang.String" value="T&#xe0;i kho&#x1ea3;n"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TaiKhoanActionPerformed"/>
-              </Events>
             </Component>
             <Component class="RSMaterialComponent.RSPasswordMaterial" name="MatKhau">
               <Properties>

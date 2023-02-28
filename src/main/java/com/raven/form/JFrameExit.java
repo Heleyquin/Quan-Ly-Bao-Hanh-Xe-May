@@ -1,7 +1,7 @@
 
 package com.raven.form;
 
-import com.mycompany.warranty.WelcomeJFrame;
+import com.raven.component.WelcomeJFrame;
 import com.raven.main.Main;
 import java.awt.Color;
 public class JFrameExit extends javax.swing.JFrame {
@@ -46,16 +46,20 @@ public class JFrameExit extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelWarning.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelWarning.setForeground(new java.awt.Color(204, 0, 51));
         LabelWarning.setText("Bạn có chắc chắn muốn thoát");
+        jPanel1.add(LabelWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 6, -1, 37));
 
         WarningIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/warning.png"))); // NOI18N
         WarningIcon1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(WarningIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 6, -1, 33));
 
         WarningIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/warning.png"))); // NOI18N
         WarningIcon2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(WarningIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 6, -1, 37));
 
         Reject.setBackground(new java.awt.Color(0, 255, 0));
         Reject.setText("Từ chối");
@@ -65,6 +69,7 @@ public class JFrameExit extends javax.swing.JFrame {
                 RejectActionPerformed(evt);
             }
         });
+        jPanel1.add(Reject, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 101, 108, -1));
 
         Agree.setBackground(new java.awt.Color(255, 0, 102));
         Agree.setText("Đồng ý");
@@ -74,6 +79,7 @@ public class JFrameExit extends javax.swing.JFrame {
                 AgreeActionPerformed(evt);
             }
         });
+        jPanel1.add(Agree, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 101, 108, -1));
 
         DangXuat.setBackground(new java.awt.Color(153, 153, 255));
         DangXuat.setText("Đăng xuất");
@@ -83,43 +89,7 @@ public class JFrameExit extends javax.swing.JFrame {
                 DangXuatActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(WarningIcon1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabelWarning)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(WarningIcon2)
-                        .addGap(61, 61, 61))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Agree, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(DangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Reject, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(WarningIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(WarningIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Reject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Agree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jPanel1.add(DangXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 101, 128, -1));
 
         panel1.setBackground(new java.awt.Color(255, 0, 51));
 
@@ -185,7 +155,7 @@ public class JFrameExit extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(panel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
                     .addComponent(panel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

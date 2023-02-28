@@ -23,29 +23,32 @@ public class CTBH_JPanel extends javax.swing.JPanel {
 
     public CTBH_JPanel() {
         initComponents();
-        this.insertTable("1");
+        this.insertTable();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        MoTa = new javax.swing.JLabel();
         header1 = new com.raven.component.Header();
+        backButton = new RSComponentShade.RSButtonShade();
+        PanelTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableQuaTrinhBH = new rojeru_san.complementos.TableMetro();
-        backButton = new RSComponentShade.RSButtonShade();
+        jLabel1 = new javax.swing.JLabel();
+        MoTa = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 0));
-        jLabel1.setText("Yêu cầu");
+        backButton.setBackground(new java.awt.Color(153, 255, 255));
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/goback2.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
-        MoTa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        MoTa.setForeground(new java.awt.Color(255, 255, 255));
-        MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        PanelTable.setBackground(new java.awt.Color(153, 255, 255));
+        PanelTable.setPreferredSize(new java.awt.Dimension(843, 507));
 
         tableQuaTrinhBH.setBackground(new java.awt.Color(153, 255, 255));
         tableQuaTrinhBH.setModel(new javax.swing.table.DefaultTableModel(
@@ -78,44 +81,50 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         tableQuaTrinhBH.setFuenteFilas(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tableQuaTrinhBH.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         tableQuaTrinhBH.setGridColor(new java.awt.Color(153, 255, 255));
-        tableQuaTrinhBH.setPreferredSize(new java.awt.Dimension(945, 1530));
+        tableQuaTrinhBH.setPreferredScrollableViewportSize(new java.awt.Dimension(450, 507));
+        tableQuaTrinhBH.setPreferredSize(new java.awt.Dimension(945, 507));
         tableQuaTrinhBH.setRowHeight(30);
+        tableQuaTrinhBH.setShowGrid(true);
         tableQuaTrinhBH.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableQuaTrinhBH);
         tableQuaTrinhBH.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        backButton.setBackground(new java.awt.Color(153, 255, 255));
-        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/goback2.png"))); // NOI18N
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout PanelTableLayout = new javax.swing.GroupLayout(PanelTable);
+        PanelTable.setLayout(PanelTableLayout);
+        PanelTableLayout.setHorizontalGroup(
+            PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+        PanelTableLayout.setVerticalGroup(
+            PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Tình trạng khi tiếp nhận:");
+
+        MoTa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                        .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(3, 3, 3))
+            .addComponent(PanelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(100, Short.MAX_VALUE)
-                    .addComponent(MoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(MoTa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,15 +134,12 @@ public class CTBH_JPanel extends javax.swing.JPanel {
                     .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(MoTa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(MoTa, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(339, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,7 +148,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
         Main main = new Main();
         main.getMain().setForm(QLBH);
-        main.setStatus(0);
+        main.setStatusBH(0);
     }//GEN-LAST:event_backButtonActionPerformed
 
     @Override
@@ -156,7 +162,9 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
-    public void insertTable(String id_nhan){
+    public void insertTable(){
+        QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
+        String id_nhan = QLBH.getId_nhan();
         connectSQL conn = new connectSQL();
         ResultSet rs;
         DefaultTableModel dT = (DefaultTableModel) tableQuaTrinhBH.getModel();
@@ -165,6 +173,9 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             rs.next();
             MoTa.setText(rs.getString(1));
             dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
+            System.out.println(rs.getString(6));
+            System.out.println(rs.getString(5));
+            System.out.println(rs.getString(4));
             while(rs.next()){
                 dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
             }
@@ -175,6 +186,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MoTa;
+    private javax.swing.JPanel PanelTable;
     private RSComponentShade.RSButtonShade backButton;
     private com.raven.component.Header header1;
     private javax.swing.JLabel jLabel1;
