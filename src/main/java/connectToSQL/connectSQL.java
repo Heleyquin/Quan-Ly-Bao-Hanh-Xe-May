@@ -74,8 +74,8 @@ public class connectSQL {
         return rs;
     }
     public ResultSet ds_pbh_nhan(){
-        String SQL = "select * From xem_ds_nhan_bh";
-        Statement st = null;
+        String SQL = "SELECT * FROM ds_pbh_nhan";
+        Statement st;
         ResultSet rs = null;
         try {
             st = conn.createStatement();
@@ -155,6 +155,22 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return rs;
+    }
+    
+    public int co_the_xoa_sua_pbh_nhan(String id_nhan){
+        String SQL = "{? = call co_the_xoa_sua_pbh_nhan(?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, Integer.parseInt(id_nhan));
+            cs.execute();
+            result = cs.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
     }
     
     public void close(){

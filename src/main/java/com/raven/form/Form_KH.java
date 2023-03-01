@@ -16,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Form_KH extends javax.swing.JPanel {
 
@@ -29,11 +31,14 @@ public class Form_KH extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        header1 = new com.raven.component.Header();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMetro1 = new rojeru_san.complementos.TableMetro();
+        searchBar = new RSComponentShade.RSTextFieldShade();
+        search = new rojeru_san.rsbutton.RSButtonEffect();
+        listSearch = new RSMaterialComponent.RSComboBoxMaterial();
 
         setBackground(new java.awt.Color(153, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,27 +94,36 @@ public class Form_KH extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(242, Short.MAX_VALUE)
-                        .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 791, 295));
+
+        searchBar.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        searchBar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        searchBar.setPlaceholder("Nhập kí tự");
+        add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 256, -1));
+
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 0, 69, 45));
+
+        listSearch.setBackground(new java.awt.Color(255, 204, 204));
+        listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã khách hàng", "CCCD", "Họ Tên", "Ngày sinh", "Số điện thoại", "Giới tính", "Email" }));
+        add(listSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 5, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        int selectIndex = listSearch.getSelectedIndex();
+        String searchStr = search.getText();
+        System.out.println(searchStr);
+        DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
+        tableMetro1.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
+    }//GEN-LAST:event_searchActionPerformed
 
     @Override
     protected void paintChildren(Graphics grphcs) {
@@ -143,8 +157,10 @@ public class Form_KH extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.component.Header header1;
     private javax.swing.JScrollPane jScrollPane1;
+    private RSMaterialComponent.RSComboBoxMaterial listSearch;
+    private rojeru_san.rsbutton.RSButtonEffect search;
+    private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableMetro1;
     // End of variables declaration//GEN-END:variables
 }

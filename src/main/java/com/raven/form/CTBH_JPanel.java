@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -35,10 +37,12 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         tableQuaTrinhBH = new rojeru_san.complementos.TableMetro();
         jLabel1 = new javax.swing.JLabel();
         MoTa = new javax.swing.JLabel();
-        rSTextFieldShade1 = new RSComponentShade.RSTextFieldShade();
-        rSButtonEffect1 = new rojeru_san.rsbutton.RSButtonEffect();
+        searchBar = new RSComponentShade.RSTextFieldShade();
+        search = new rojeru_san.rsbutton.RSButtonEffect();
+        listSearch = new RSMaterialComponent.RSComboBoxMaterial();
 
         setBackground(new java.awt.Color(102, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         backButton.setBackground(new java.awt.Color(153, 255, 255));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/goback2.png"))); // NOI18N
@@ -47,6 +51,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
                 backButtonActionPerformed(evt);
             }
         });
+        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 3, 66, 51));
 
         PanelTable.setBackground(new java.awt.Color(153, 255, 255));
         PanelTable.setPreferredSize(new java.awt.Dimension(843, 507));
@@ -101,57 +106,32 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
         );
 
+        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, 798, -1));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Tình trạng khi tiếp nhận:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 60, -1, 35));
 
         MoTa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(MoTa, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 60, 568, 35));
 
-        rSTextFieldShade1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        rSTextFieldShade1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        rSTextFieldShade1.setPlaceholder("Mã khung xe");
+        searchBar.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        searchBar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        searchBar.setPlaceholder("Nhập kí tự");
+        add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 0, 256, -1));
 
-        rSButtonEffect1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 0, 69, 45));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelTable, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(MoTa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rSTextFieldShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonEffect1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(rSTextFieldShade1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rSButtonEffect1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MoTa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        listSearch.setBackground(new java.awt.Color(153, 255, 153));
+        listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhân viên thực hiện", "Mô tả", "Thời gian" }));
+        add(listSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 5, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -161,6 +141,17 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         main.getMain().setForm(QLBH);
         main.setStatusBH(0);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        int selectIndex = listSearch.getSelectedIndex();
+        String searchStr = search.getText();
+        System.out.println(searchStr);
+        DefaultTableModel dT = (DefaultTableModel) tableQuaTrinhBH.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
+        tableQuaTrinhBH.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
+    }//GEN-LAST:event_searchActionPerformed
 
     @Override
     protected void paintChildren(Graphics grphcs) {
@@ -198,8 +189,9 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     private RSComponentShade.RSButtonShade backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private rojeru_san.rsbutton.RSButtonEffect rSButtonEffect1;
-    private RSComponentShade.RSTextFieldShade rSTextFieldShade1;
+    private RSMaterialComponent.RSComboBoxMaterial listSearch;
+    private rojeru_san.rsbutton.RSButtonEffect search;
+    private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableQuaTrinhBH;
     // End of variables declaration//GEN-END:variables
 }

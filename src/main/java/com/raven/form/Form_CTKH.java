@@ -11,7 +11,9 @@ import java.awt.RenderingHints;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Form_CTKH extends javax.swing.JPanel {
 
@@ -38,10 +40,12 @@ public class Form_CTKH extends javax.swing.JPanel {
         PanelTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMetro1 = new rojeru_san.complementos.TableMetro();
-        rSTextFieldShade1 = new RSComponentShade.RSTextFieldShade();
-        rSButtonEffect1 = new rojeru_san.rsbutton.RSButtonEffect();
+        searchBar = new RSComponentShade.RSTextFieldShade();
+        search = new rojeru_san.rsbutton.RSButtonEffect();
+        listSearch = new RSMaterialComponent.RSComboBoxMaterial();
 
         setBackground(new java.awt.Color(51, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         backButton.setBackground(new java.awt.Color(153, 255, 255));
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/goback2.png"))); // NOI18N
@@ -50,13 +54,16 @@ public class Form_CTKH extends javax.swing.JPanel {
                 backButtonActionPerformed(evt);
             }
         });
+        add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 74, 51));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Khách hàng: ");
         jLabel1.setPreferredSize(new java.awt.Dimension(111, 10));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, -1, 35));
 
         name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         name.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 57, 674, 35));
 
         PanelTable.setBackground(new java.awt.Color(153, 255, 255));
 
@@ -116,47 +123,25 @@ public class Form_CTKH extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
         );
 
-        rSTextFieldShade1.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        rSTextFieldShade1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        rSTextFieldShade1.setPlaceholder("Mã khung xe");
+        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 98, -1, -1));
 
-        rSButtonEffect1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        searchBar.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        searchBar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        searchBar.setPlaceholder("Nhập kí tự");
+        add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 256, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
-                    .addComponent(PanelTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rSTextFieldShade1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonEffect1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSTextFieldShade1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rSButtonEffect1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/search.png"))); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 0, 69, 45));
+
+        listSearch.setBackground(new java.awt.Color(255, 204, 204));
+        listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã khung xe", "Thời gian tiếp nhận", "Ghi chú" }));
+        listSearch.setColorMaterial(new java.awt.Color(255, 51, 255));
+        add(listSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -166,6 +151,17 @@ public class Form_CTKH extends javax.swing.JPanel {
         main.getMain().setForm(KH);
         main.setStatusKH(0);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        int selectIndex = listSearch.getSelectedIndex();
+        String searchStr = search.getText();
+        System.out.println(searchStr);
+        DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
+        tableMetro1.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
+    }//GEN-LAST:event_searchActionPerformed
 
     @Override
     protected void paintChildren(Graphics grphcs) {
@@ -198,9 +194,10 @@ public class Form_CTKH extends javax.swing.JPanel {
     private RSComponentShade.RSButtonShade backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private RSMaterialComponent.RSComboBoxMaterial listSearch;
     private javax.swing.JLabel name;
-    private rojeru_san.rsbutton.RSButtonEffect rSButtonEffect1;
-    private RSComponentShade.RSTextFieldShade rSTextFieldShade1;
+    private rojeru_san.rsbutton.RSButtonEffect search;
+    private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableMetro1;
     // End of variables declaration//GEN-END:variables
 }

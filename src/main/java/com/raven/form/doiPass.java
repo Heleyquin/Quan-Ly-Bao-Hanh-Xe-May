@@ -9,8 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 public class doiPass extends javax.swing.JPanel {
@@ -31,12 +30,12 @@ public class doiPass extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         xacnhan = new rojeru_san.rsbutton.RSButtonMetro();
-        mkmoi_nhaplai = new rojeru_san.rsfield.RSTextFull();
-        mkmoi = new rojeru_san.rsfield.RSTextFull();
-        mkcu = new rojeru_san.rsfield.RSTextFull();
         saiPassCu = new javax.swing.JLabel();
         saiDinhDang = new javax.swing.JLabel();
         saiPassMoi = new javax.swing.JLabel();
+        mkcu = new rojeru_san.rsfield.RSPassViewRound();
+        mkmoi_nhaplai = new rojeru_san.rsfield.RSPassViewRound();
+        mkmoi = new rojeru_san.rsfield.RSPassViewRound();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -69,19 +68,6 @@ public class doiPass extends javax.swing.JPanel {
         });
         form_doiPass.add(xacnhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, 60));
 
-        mkmoi_nhaplai.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mkmoi_nhaplai.setPlaceholder("A-z, 0-9, 1-20 kí tự");
-        form_doiPass.add(mkmoi_nhaplai, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 330, -1));
-
-        mkmoi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mkmoi.setName(""); // NOI18N
-        mkmoi.setPlaceholder("A-z, 0-9, 1-20 kí tự");
-        form_doiPass.add(mkmoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 330, -1));
-
-        mkcu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mkcu.setPlaceholder("A-z, 0-9, 1-20 kí tự");
-        form_doiPass.add(mkcu, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 330, -1));
-
         saiPassCu.setForeground(new java.awt.Color(255, 0, 51));
         form_doiPass.add(saiPassCu, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 320, 20));
 
@@ -91,7 +77,22 @@ public class doiPass extends javax.swing.JPanel {
         saiPassMoi.setForeground(new java.awt.Color(255, 0, 0));
         form_doiPass.add(saiPassMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 330, 20));
 
-        add(form_doiPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 780, 330));
+        mkcu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        mkcu.setPhColor(new java.awt.Color(153, 153, 255));
+        mkcu.setPlaceholder("A-z, 0-9, 1-20 kí tự");
+        form_doiPass.add(mkcu, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 310, -1));
+
+        mkmoi_nhaplai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        mkmoi_nhaplai.setPhColor(new java.awt.Color(102, 102, 255));
+        mkmoi_nhaplai.setPlaceholder("A-z, 0-9, 1-20 kí tự");
+        form_doiPass.add(mkmoi_nhaplai, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 310, -1));
+
+        mkmoi.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        mkmoi.setPhColor(new java.awt.Color(102, 102, 255));
+        mkmoi.setPlaceholder("A-z, 0-9, 1-20 kí tự");
+        form_doiPass.add(mkmoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 310, -1));
+
+        add(form_doiPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 780, 340));
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setToolTipText("");
@@ -107,7 +108,7 @@ public class doiPass extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(313, 313, 313)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,17 +117,17 @@ public class doiPass extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xacnhanActionPerformed
         // TODO add your handling code here:
         String regex = "^[A-Za-z0-9]{1,20}$";
         Pattern pattern = Pattern.compile(regex);
-        Matcher mat = pattern.matcher(mkmoi.getText());
+        Matcher mat = pattern.matcher(String.valueOf(mkcu.getPassword()));
         int chon = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn đổi mật khẩu không", "Cảnh báo", JOptionPane.YES_NO_OPTION);
         if (chon == JOptionPane.YES_OPTION) {
-            if (!new com.raven.main.WelcomeJFrame().getMK().equals(mkcu.getText())) {
+            if (new com.raven.main.WelcomeJFrame().getMK().equals(String.valueOf(mkcu.getPassword())) == false) {
                 saiDinhDang.setText(null);
                 saiPassMoi.setText(null);
                 saiPassCu.setText("Sai mật khảu");
@@ -134,7 +135,7 @@ public class doiPass extends javax.swing.JPanel {
                 saiDinhDang.setText("Mật khẩu sai định dạng");
                 saiPassMoi.setText(null);
                 saiPassCu.setText(null);
-            } else if (!mkmoi.getText().equals(mkmoi_nhaplai.getText())) {
+            } else if (Arrays.equals(mkcu.getPassword(),mkmoi_nhaplai.getPassword())) {
                 saiDinhDang.setText(null);
                 saiPassMoi.setText("Mật khẩu nhập lại không đúng");
                 saiPassCu.setText(null);
@@ -144,12 +145,12 @@ public class doiPass extends javax.swing.JPanel {
                 saiPassCu.setText(null);
                 try {
                     connectSQL conn = new connectSQL();
-                    ResultSet rs = conn.updatePass(mkmoi.getText());
+                    ResultSet rs = conn.updatePass(String.valueOf(mkmoi.getPassword()));
                     rs.next();
                     int result = rs.getInt(1);
                     if (result == 1) {
                         JOptionPane.showMessageDialog(null, "Thay đổi mật khẩu thành công", "Thành công", JOptionPane.OK_OPTION);
-                        new com.raven.main.WelcomeJFrame().setMK(mkmoi.getText());
+                        new com.raven.main.WelcomeJFrame().setMK(String.valueOf(mkmoi.getPassword()));
                     }else{
                         JOptionPane.showMessageDialog(null, "Thay đổi mật khẩu không thành công", "Thất bại", JOptionPane.OK_OPTION);
                     }
@@ -184,9 +185,9 @@ public class doiPass extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private rojeru_san.rsfield.RSTextFull mkcu;
-    private rojeru_san.rsfield.RSTextFull mkmoi;
-    private rojeru_san.rsfield.RSTextFull mkmoi_nhaplai;
+    private rojeru_san.rsfield.RSPassViewRound mkcu;
+    private rojeru_san.rsfield.RSPassViewRound mkmoi;
+    private rojeru_san.rsfield.RSPassViewRound mkmoi_nhaplai;
     private javax.swing.JLabel saiDinhDang;
     private javax.swing.JLabel saiPassCu;
     private javax.swing.JLabel saiPassMoi;

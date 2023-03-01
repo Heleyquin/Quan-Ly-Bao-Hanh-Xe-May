@@ -25,8 +25,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="237" max="32767" attributes="0"/>
-                      <Component id="header1" min="-2" pref="549" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="them" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace pref="68" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="listSearch" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="searchBar" min="-2" pref="256" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="search" min="-2" pref="69" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="xoa" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                              <Component id="sua" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -36,17 +52,32 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="header1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="361" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="searchBar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="search" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="listSearch" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="them" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="sua" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="xoa" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="373" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.raven.component.Header" name="header1">
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -80,7 +111,7 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       JTable tableTemp = (JTable)e.getSource();&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;; &#xa;                       connectSQL conn = new connectSQL();&#xa;                       int a = conn.co_the_xoa_sua_pbh_nhan(temp);&#xa;                       System.out.println(a);&#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
@@ -138,5 +169,91 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="RSComponentShade.RSTextFieldShade" name="searchBar">
+      <Properties>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="1"/>
+        </Property>
+        <Property name="placeholder" type="java.lang.String" value="Nh&#x1ead;p k&#xed; t&#x1ef1;"/>
+      </Properties>
+    </Component>
+    <Component class="rojeru_san.rsbutton.RSButtonEffect" name="search">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/com/raven/icon/search.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="RSMaterialComponent.RSComboBoxMaterial" name="listSearch">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="ff" type="rgb"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="6">
+            <StringItem index="0" value="M&#xe3; phi&#x1ebf;u nh&#x1ead;n"/>
+            <StringItem index="1" value="M&#xe3; th&#x1ebb; b&#x1ea3;o h&#xe0;nh"/>
+            <StringItem index="2" value="Nh&#xe2;n vi&#xea;n nh&#x1ead;n"/>
+            <StringItem index="3" value="Ng&#xe0;y ti&#x1ebf;p nh&#x1ead;n"/>
+            <StringItem index="4" value="Nh&#xe2;n vi&#xea;n tr&#x1ea3;"/>
+            <StringItem index="5" value="Ng&#xe0;y tr&#x1ea3;"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="them">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="ff" red="33" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="label" type="java.lang.String" value="Th&#xea;m"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="sua">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="sua.setRolloverEnabled(false);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="xoa">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="xoa.setRolloverEnabled(false);"/>
+      </AuxValues>
+    </Component>
   </SubComponents>
 </Form>
