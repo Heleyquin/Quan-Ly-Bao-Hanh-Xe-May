@@ -1,6 +1,6 @@
 package com.raven.form;
 
-import com.raven.component.WelcomeJFrame;
+import com.raven.main.WelcomeJFrame;
 import com.raven.main.Main;
 import com.raven.model.Nhan_Vien;
 import connectToSQL.connectSQL;

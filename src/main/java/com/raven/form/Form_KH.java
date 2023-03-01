@@ -81,7 +81,8 @@ public class Form_KH extends javax.swing.JPanel {
                     String makh = tableTemp.getModel().getValueAt(indexRow, 0)+"";
                     Main main = new Main();
                     Form_CTKH CTKH = new Form_CTKH();
-                    CTKH.insertCTKH(makh);
+                    CTKH.setMaKH(makh);
+                    CTKH.insertCTKH();
                     main.getMain().setForm(CTKH);
                     main.setStatusKH(1);
                 }

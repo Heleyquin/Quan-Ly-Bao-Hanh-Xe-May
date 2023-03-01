@@ -1,7 +1,7 @@
 
 package com.raven.form;
 
-import com.raven.component.WelcomeJFrame;
+import com.raven.main.WelcomeJFrame;
 import com.raven.main.Main;
 import java.awt.Color;
 public class JFrameExit extends javax.swing.JFrame {

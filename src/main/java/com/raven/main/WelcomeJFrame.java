@@ -1,7 +1,5 @@
 
-package com.raven.component;
-
-import com.raven.main.Main;
+package com.raven.main;
 import connectToSQL.connectSQL;
 
 public class WelcomeJFrame extends javax.swing.JFrame {
@@ -235,7 +233,6 @@ public class WelcomeJFrame extends javax.swing.JFrame {
 
     public void setTK(){
         tk = TaiKhoan.getText();
-        System.out.println(TaiKhoan.getText());
     }
     public String getTK(){
         return tk;

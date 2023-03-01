@@ -1,6 +1,5 @@
 package com.raven.component;
 
-import com.mycompany.warranty.main;
 import com.raven.event.EventMenuSelected;
 import com.raven.model.Model_Menu;
 import java.awt.Color;
@@ -37,7 +36,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void init() {
         conn = new connectSQL();
-        String tk = main.tk;
+        String tk = new com.raven.main.WelcomeJFrame().getTK();
         ResultSet rs = conn.timnv_bang_tk(tk);
         String name = null;
         try {

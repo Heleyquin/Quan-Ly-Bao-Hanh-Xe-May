@@ -173,9 +173,6 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             rs.next();
             MoTa.setText(rs.getString(1));
             dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
-            System.out.println(rs.getString(6));
-            System.out.println(rs.getString(5));
-            System.out.println(rs.getString(4));
             while(rs.next()){
                 dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
             }

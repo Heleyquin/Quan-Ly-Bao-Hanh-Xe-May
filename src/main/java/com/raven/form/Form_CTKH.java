@@ -168,7 +168,7 @@ public class Form_CTKH extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
-    public void insertCTKH(String makh){
+    public void insertCTKH(){
         connectSQL conn = new connectSQL();
         ResultSet rs = conn.sp_ct_kh(makh);
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();

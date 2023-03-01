@@ -57,6 +57,9 @@ public class Main extends javax.swing.JFrame {
                     }
                     else if(main.getStatusKH() == 1){
                         form22 = new Form_CTKH();
+                        System.out.print("Mã là: ");
+                        System.out.println(form22.getMaKH());
+                        form22.insertCTKH();
                         main.setForm(form22);
                     }
                 } else if (index == 3) {
