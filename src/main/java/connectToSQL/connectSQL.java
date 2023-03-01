@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class connectSQL {
     private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
@@ -117,6 +120,36 @@ public class connectSQL {
         try {
             cs = conn.prepareCall(SQL);
             cs.setString(1, makh);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet kiem_tra_bh(String kx){
+        String SQL = "{call kiem_tra_bh(?)}";
+        CallableStatement cs;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, kx);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet updatePass(String pass){
+        String SQL = "{call updatesPass(?,?)}";
+        CallableStatement cs;
+        ResultSet rs = null;
+        String tk = new com.raven.main.WelcomeJFrame().getTK();
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, pass);
+            cs.setString(2, tk);
             rs = cs.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.toString());

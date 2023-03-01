@@ -9,21 +9,21 @@ import com.raven.form.Form_3;
 import com.raven.form.Form_CTKH;
 import com.raven.form.Form_Home;
 import com.raven.form.JFrameExit;
+import com.raven.form.TBH;
+import com.raven.form.doiPass;
 import java.awt.Color;
 import javax.swing.JComponent;
 public class Main extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Main
-     */
+    
     private Form_Home home;
     private QuanLyBaoHanh form1;
     private CTBH_JPanel form12;
     private Form_KH form2;
     private Form_CTKH form22;
     private Form_3 form3;
-    private Form_3 form4;
+    private doiPass form4;
     private JFrameExit form5;
+    private TBH form6;
     static Main main = new Main();
     static int statusBH = 0;//Lưu trạng thai của form, 0 là Form QLBH, 1 là Form CTBH
     static int statusKH = 0;//0 ở Form_KhachHang, 1 ở Form CTKH
@@ -35,8 +35,9 @@ public class Main extends javax.swing.JFrame {
         form1 = new QuanLyBaoHanh();
         form2 = new Form_KH();
         form3 = new Form_3();
-        form4 = new Form_3();
+        form4 = new doiPass();
         form5 = new JFrameExit();
+        form6 = new TBH();
         menu2.initMoving(Main.this);
         menu2.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -65,8 +66,10 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
                     main.setForm(form3);
                 } else if(index == 4){
+                    main.setForm(form6);
+                } else if(index == 5){
                     main.setForm(form4);
-                }else if(index == 6){
+                } else if(index == 7){
                     form5.setVisible(true);
                 }
             }

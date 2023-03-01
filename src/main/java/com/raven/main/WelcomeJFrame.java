@@ -5,6 +5,7 @@ import connectToSQL.connectSQL;
 public class WelcomeJFrame extends javax.swing.JFrame {
 
     private static String tk;
+    private static String mk;
     public WelcomeJFrame() {
         initComponents();
     }
@@ -234,13 +235,23 @@ public class WelcomeJFrame extends javax.swing.JFrame {
     public void setTK(){
         tk = TaiKhoan.getText();
     }
+    
     public String getTK(){
         return tk;
+    }
+    public void setMK(String mkMoi){
+        mk = mkMoi;
+    }
+    public void setMK(){
+        mk = String.valueOf(MatKhau.getPassword());
+    }
+    public String getMK(){
+        return mk;
     }
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
         this.setTK();
-        String mk = String.copyValueOf(MatKhau.getPassword());
+        this.setMK();
         connectSQL conn = new connectSQL();
         int result = conn.timTk(tk, mk);
         if (result == 1){
