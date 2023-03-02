@@ -11,17 +11,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
-import connectToSQL.connectSQL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
         
 public class Menu extends javax.swing.JPanel {
 
     private EventMenuSelected event;
-    private connectSQL conn;
-    
     public void addEventMenuSelected(EventMenuSelected event) {
         this.event = event;
         listMenu1.addEventMenuSelected(event);
@@ -35,16 +28,6 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void init() {
-        conn = new connectSQL();
-        String tk = new com.raven.main.WelcomeJFrame().getTK();
-        ResultSet rs = conn.timnv_bang_tk(tk);
-        String name = null;
-        try {
-            name = rs.getString("Ho") + " " + rs.getString("Ten");
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        nameLabel.setText(name);
         listMenu1.addItem(new Model_Menu("1", "Thông tin người dùng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Quản lí bảo hành", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Quản lí khách hàng", Model_Menu.MenuType.MENU));
@@ -55,7 +38,6 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("", " ", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("10", "Exit", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        
     }
 
     @SuppressWarnings("unchecked")

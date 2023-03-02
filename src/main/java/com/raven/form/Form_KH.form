@@ -16,6 +16,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,102,0,0,3,31"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -33,7 +34,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="54" width="791" height="295"/>
+          <AbsoluteConstraints x="0" y="90" width="791" height="295"/>
         </Constraint>
       </Constraints>
 
@@ -61,7 +62,7 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String makh = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        Form_CTKH CTKH = new Form_CTKH();&#xa;                        CTKH.setMaKH(makh);&#xa;                        CTKH.insertCTKH();&#xa;                        main.getMain().setForm(CTKH);&#xa;                        main.setStatusKH(1);&#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    connectSQL conn = new connectSQL();&#xa;                    ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());&#xa;                    JTable tableTemp = (JTable)e.getSource();&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        String makh = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        String tenKh = tableTemp.getModel().getValueAt(indexRow, 2)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        Form_CTKH CTKH = new Form_CTKH();&#xa;                        CTKH.setMaKH(makh);&#xa;                        CTKH.setTenKH(tenKh);&#xa;                        CTKH.insertCTKH();&#xa;                        main.getMain().setForm(CTKH);&#xa;                        main.setStatusKH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                       cccd = tableTemp.getModel().getValueAt(indexRow, 1)+&quot;&quot;;&#xa;                       ngaySinh = tableTemp.getModel().getValueAt(indexRow, 3)+&quot;&quot;;&#xa;                       sdt = tableTemp.getModel().getValueAt(indexRow, 4)+&quot;&quot;;&#xa;                       gioi = tableTemp.getModel().getValueAt(indexRow, 5)+&quot;&quot;;&#xa;                       mail = tableTemp.getModel().getValueAt(indexRow, 6)+&quot;&quot;;&#xa;                       ma_kh_xoa = temp;&#xa;                       ResultSet rsTemp = conn.timKH(temp);&#xa;                       try{&#xa;                           rsTemp.next();&#xa;                           ho = rsTemp.getString(1);&#xa;                           ten = rsTemp.getString(2);&#xa;                           &#xa;                       }catch(SQLException ex){&#xa;                           System.out.println(ex);&#xa;                       }&#xa;                       int a = conn.co_the_xoa_kh(temp);&#xa;                       if (a == 1){&#xa;                        try{&#xa;                           rs.next();&#xa;                           int quyen = rs.getInt(1);&#xa;                           if(quyen == 2){&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                            else if(quyen == 1){&#xa;                               sua.setVisible(true);&#xa;                               xoa.setVisible(true);&#xa;                            }&#xa;                        }&#xa;                        catch(SQLException ex){&#xa;                            System.out.println(ex);&#xa;                        }&#xa;                        }else{&#xa;                           sua.setVisible(false);&#xa;                           xoa.setVisible(false);&#xa;                        } &#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
@@ -175,6 +176,75 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="254" y="5" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="them">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="ff" red="33" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="label" type="java.lang.String" value="Th&#xea;m"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="110" y="50" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="xoa">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xoaActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="xoa.setVisible(false);"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="350" y="50" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="sua">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="66" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suaActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="sua.setVisible(false);"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="590" y="50" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

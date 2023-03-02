@@ -14,19 +14,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Form_KH extends javax.swing.JPanel {
 
+    private static String ma_kh_xoa, sdt, cccd, ngaySinh, ho, ten, gioi, mail;
     public Form_KH() {
         initComponents();
         this.insertKH();
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,6 +38,9 @@ public class Form_KH extends javax.swing.JPanel {
         searchBar = new RSComponentShade.RSTextFieldShade();
         search = new rojeru_san.rsbutton.RSButtonEffect();
         listSearch = new RSMaterialComponent.RSComboBoxMaterial();
+        them = new javax.swing.JButton();
+        xoa = new javax.swing.JButton();
+        sua = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,20 +86,61 @@ public class Form_KH extends javax.swing.JPanel {
         tableMetro1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int indexRow = tableMetro1.rowAtPoint(e.getPoint());
+                connectSQL conn = new connectSQL();
+                ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());
+                JTable tableTemp = (JTable)e.getSource();
                 if (e.getClickCount() == 2 && indexRow >= 0) {
-                    JTable tableTemp = (JTable)e.getSource();
                     String makh = tableTemp.getModel().getValueAt(indexRow, 0)+"";
+                    String tenKh = tableTemp.getModel().getValueAt(indexRow, 2)+"";
                     Main main = new Main();
                     Form_CTKH CTKH = new Form_CTKH();
                     CTKH.setMaKH(makh);
+                    CTKH.setTenKH(tenKh);
                     CTKH.insertCTKH();
                     main.getMain().setForm(CTKH);
                     main.setStatusKH(1);
+                }else if(e.getClickCount() == 1){
+                    String temp = tableTemp.getModel().getValueAt(indexRow, 0)+"";
+                    cccd = tableTemp.getModel().getValueAt(indexRow, 1)+"";
+                    ngaySinh = tableTemp.getModel().getValueAt(indexRow, 3)+"";
+                    sdt = tableTemp.getModel().getValueAt(indexRow, 4)+"";
+                    gioi = tableTemp.getModel().getValueAt(indexRow, 5)+"";
+                    mail = tableTemp.getModel().getValueAt(indexRow, 6)+"";
+                    ma_kh_xoa = temp;
+                    ResultSet rsTemp = conn.timKH(temp);
+                    try{
+                        rsTemp.next();
+                        ho = rsTemp.getString(1);
+                        ten = rsTemp.getString(2);
+
+                    }catch(SQLException ex){
+                        System.out.println(ex);
+                    }
+                    int a = conn.co_the_xoa_kh(temp);
+                    if (a == 1){
+                        try{
+                            rs.next();
+                            int quyen = rs.getInt(1);
+                            if(quyen == 2){
+                                sua.setVisible(true);
+                            }
+                            else if(quyen == 1){
+                                sua.setVisible(true);
+                                xoa.setVisible(true);
+                            }
+                        }
+                        catch(SQLException ex){
+                            System.out.println(ex);
+                        }
+                    }else{
+                        sua.setVisible(false);
+                        xoa.setVisible(false);
+                    }
                 }
             }
         });
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 791, 295));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 791, 295));
 
         searchBar.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         searchBar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -112,6 +158,36 @@ public class Form_KH extends javax.swing.JPanel {
         listSearch.setBackground(new java.awt.Color(255, 204, 204));
         listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã khách hàng", "CCCD", "Họ Tên", "Ngày sinh", "Số điện thoại", "Giới tính", "Email" }));
         add(listSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 5, -1, -1));
+
+        them.setBackground(new java.awt.Color(51, 255, 51));
+        them.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        them.setForeground(new java.awt.Color(255, 255, 255));
+        them.setLabel("Thêm");
+        add(them, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        xoa.setBackground(new java.awt.Color(255, 51, 51));
+        xoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        xoa.setForeground(new java.awt.Color(255, 255, 255));
+        xoa.setText("Xóa");
+        xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoaActionPerformed(evt);
+            }
+        });
+        add(xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+        xoa.setVisible(false);
+
+        sua.setBackground(new java.awt.Color(255, 102, 102));
+        sua.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        sua.setForeground(new java.awt.Color(255, 255, 255));
+        sua.setText("Sửa");
+        sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suaActionPerformed(evt);
+            }
+        });
+        add(sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 50, -1, -1));
+        sua.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -125,6 +201,39 @@ public class Form_KH extends javax.swing.JPanel {
         sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
     }//GEN-LAST:event_searchActionPerformed
 
+    private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa? Không thể hoàn tác!!!", "Cảnh báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            connectSQL conn = new connectSQL();
+            int result = conn.xoa_kh(ma_kh_xoa);
+            if (result > 0){
+                JOptionPane.showMessageDialog(null, "Bạn đã xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+                dT.setRowCount(0);
+                this.insertKH();    
+            }
+        } else {
+
+        }
+    }//GEN-LAST:event_xoaActionPerformed
+
+    private void suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaActionPerformed
+        // TODO add your handling code here:
+        SUA_KH suakh = new SUA_KH(tableMetro1);
+        suakh.setVisible(true);
+        suakh.setLocationRelativeTo(null);
+        suakh.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        suakh.setMKH(ma_kh_xoa);
+        suakh.setTen(ten);
+        suakh.setCCCD(cccd);
+        suakh.setEmail(mail);
+        suakh.setSDT(sdt);
+        suakh.setHo(ho);
+        suakh.setNgaySinh(ngaySinh);
+        suakh.setGioi(gioi);
+    }//GEN-LAST:event_suaActionPerformed
+
     @Override
     protected void paintChildren(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -136,11 +245,15 @@ public class Form_KH extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
+    public JTable getTable(){
+        return tableMetro1;
+    }
+    
     public void insertKH(){
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         connectSQL conn = new connectSQL();
         ResultSet rs = conn.ds_kh();
-        String maKH = null, cCCD = null, ten = null, ngaySinh = null, email = null, sdt = null, gioi = null;
+        String maKH, cCCD , ten, ngaySinh, email, sdt, gioi;
         try {
             while(rs.next()){
                 maKH = rs.getString("MaKH");
@@ -150,7 +263,7 @@ public class Form_KH extends javax.swing.JPanel {
                 sdt = rs.getString("SDT");
                 email = rs.getString("Email");
                 gioi = rs.getString("Gioi");
-                dT.addRow(new Object[] {maKH, cCCD, ten, ngaySinh, sdt, email, gioi});
+                dT.addRow(new Object[] {maKH, cCCD, ten, ngaySinh, sdt, gioi, email});
             }
         } catch (SQLException ex) {
             Logger.getLogger(Form_KH.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,6 +274,9 @@ public class Form_KH extends javax.swing.JPanel {
     private RSMaterialComponent.RSComboBoxMaterial listSearch;
     private rojeru_san.rsbutton.RSButtonEffect search;
     private RSComponentShade.RSTextFieldShade searchBar;
+    private javax.swing.JButton sua;
     private rojeru_san.complementos.TableMetro tableMetro1;
+    private javax.swing.JButton them;
+    private javax.swing.JButton xoa;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@ package com.raven.form;
 
 import com.raven.main.WelcomeJFrame;
 import com.raven.main.Main;
+import connectToSQL.connectSQL;
 import java.awt.Color;
 public class JFrameExit extends javax.swing.JFrame {
 
@@ -193,11 +194,14 @@ public class JFrameExit extends javax.swing.JFrame {
 
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed
         // TODO add your handling code here:
+        connectSQL conn = new connectSQL();
+        conn.close();
+
         WelcomeJFrame welcomFrame = new WelcomeJFrame();
         Main main = new Main();
-        QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
-//        QLBH.reset();
         welcomFrame.showWelcome();
+        welcomFrame.setLocationRelativeTo(null);
+        welcomFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         main.hideMain();
         main.reset();
     }//GEN-LAST:event_DangXuatActionPerformed

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 public class Form_Home extends javax.swing.JPanel {
 
-    private static connectSQL conn;
+    private connectSQL conn;
     public Form_Home() {
         initComponents();
         conn = new connectSQL();

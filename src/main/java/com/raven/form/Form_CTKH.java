@@ -18,7 +18,7 @@ import javax.swing.table.TableRowSorter;
 public class Form_CTKH extends javax.swing.JPanel {
 
     private static String makh;
-
+    private static String tenKh;
     public Form_CTKH(){
         initComponents();
     }
@@ -28,6 +28,13 @@ public class Form_CTKH extends javax.swing.JPanel {
     
     public void setMaKH(String makh){
         this.makh = makh;
+    }
+    
+    public void setTenKH(String ten){
+        this.tenKh = ten;
+    }
+    public String getTenKH(){
+        return tenKh;
     }
     
     @SuppressWarnings("unchecked")
@@ -112,9 +119,11 @@ public class Form_CTKH extends javax.swing.JPanel {
         PanelTable.setLayout(PanelTableLayout);
         PanelTableLayout.setHorizontalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 799, Short.MAX_VALUE)
             .addGroup(PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE))
+                .addGroup(PanelTableLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         PanelTableLayout.setVerticalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,12 +187,10 @@ public class Form_CTKH extends javax.swing.JPanel {
         connectSQL conn = new connectSQL();
         ResultSet rs = conn.sp_ct_kh(makh);
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+        name.setText(tenKh);
         try {
-            rs.next();
-            name.setText(rs.getString(1));
-            dT.addRow(new Object[] {rs.getString(3), rs.getString(4), rs.getString(6)});
             while(rs.next()){
-                dT.addRow(new Object[] {rs.getString(3), rs.getString(4), rs.getString(6)});
+                dT.addRow(new Object[] {rs.getString(2), rs.getString(3), rs.getString(4)});
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());

@@ -15,8 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 /**
@@ -26,11 +28,21 @@ import javax.swing.table.TableRowSorter;
 public class QuanLyBaoHanh extends javax.swing.JPanel {
 
     private static String id_nhan;
+    private static String id_xoa;
     public QuanLyBaoHanh() {
         initComponents();
         this.insertTable();
     }
 
+    public JTable getTable(){
+        return tableMetro1;
+    }
+    public void setId_xoa(String id_xoa){
+        this.id_xoa = id_xoa;
+    }
+    public String getId_xoa(){
+        return id_xoa;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,8 +99,10 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         tableMetro1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int indexRow = tableMetro1.rowAtPoint(e.getPoint());
+                connectSQL conn = new connectSQL();
+                ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());
+                JTable tableTemp = (JTable)e.getSource();
                 if (e.getClickCount() == 2 && indexRow >= 0) {
-                    JTable tableTemp = (JTable)e.getSource();
                     String temp = tableTemp.getModel().getValueAt(indexRow, 0)+"";
                     Main main = new Main();
                     id_nhan = temp;
@@ -96,11 +110,28 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                     main.getMain().setForm(CTBH);
                     main.setStatusBH(1);
                 }else if(e.getClickCount() == 1){
-                    JTable tableTemp = (JTable)e.getSource();
                     String temp = tableTemp.getModel().getValueAt(indexRow, 0)+"";
-                    connectSQL conn = new connectSQL();
+                    id_xoa = temp;
                     int a = conn.co_the_xoa_sua_pbh_nhan(temp);
-                    System.out.println(a);
+                    if (a == 1){
+                        try{
+                            rs.next();
+                            int quyen = rs.getInt(1);
+                            if(quyen == 2){
+                                sua.setVisible(true);
+                            }
+                            else if(quyen == 1){
+                                sua.setVisible(true);
+                                xoa.setVisible(true);
+                            }
+                        }
+                        catch(SQLException ex){
+                            System.out.println(ex);
+                        }
+                    }else{
+                        sua.setVisible(false);
+                        xoa.setVisible(false);
+                    }
                 }
             }
         });
@@ -124,15 +155,25 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         them.setForeground(new java.awt.Color(255, 255, 255));
         them.setLabel("Thêm");
 
-        sua.setBackground(new java.awt.Color(204, 204, 204));
+        sua.setBackground(new java.awt.Color(255, 102, 102));
         sua.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         sua.setForeground(new java.awt.Color(255, 255, 255));
         sua.setText("Sửa");
+        sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suaActionPerformed(evt);
+            }
+        });
 
-        xoa.setBackground(new java.awt.Color(204, 204, 204));
+        xoa.setBackground(new java.awt.Color(255, 51, 51));
         xoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         xoa.setForeground(new java.awt.Color(255, 255, 255));
         xoa.setText("Xóa");
+        xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,19 +185,18 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(listSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(129, 129, 129)
-                                .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(listSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,25 +215,50 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        sua.setRolloverEnabled(false);
-        xoa.setRolloverEnabled(false);
+        sua.setVisible(false);
+        xoa.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         int selectIndex = listSearch.getSelectedIndex();
         String searchStr = searchBar.getText();
-        System.out.println(searchStr);
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
         tableMetro1.setRowSorter(sorter);
         sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
     }//GEN-LAST:event_searchActionPerformed
+
+    private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa? Không thể hoàn tác!!!", "Cảnh báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            connectSQL conn = new connectSQL();
+            int result = conn.xoa_pbh_nhan(id_xoa);
+            if (result > 0){
+                JOptionPane.showMessageDialog(null, "Bạn đã xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
+                dT.setRowCount(0);
+                this.insertTable();
+            }
+        } else {
+            
+        }
+    }//GEN-LAST:event_xoaActionPerformed
+
+    private void suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaActionPerformed
+        // TODO add your handling code here:
+        NV_SUA_PBH_NHAN suapbh = new NV_SUA_PBH_NHAN(tableMetro1);
+        this.setId_nhan(id_nhan);
+        suapbh.setVisible(true);
+        suapbh.setLocationRelativeTo(null);
+        suapbh.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }//GEN-LAST:event_suaActionPerformed
 
     public void setId_nhan(String id_nhan){
         this.id_nhan = id_nhan;
@@ -212,17 +277,17 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
+    public QuanLyBaoHanh getQLH(){
+        return this;
+    }
+    
     public void insertTable(){
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         connectSQL conn = new connectSQL();
         ResultSet rs = conn.ds_pbh_nhan();
-        int i = 1;
         try {
             while(rs.next()){
                 dT.addRow(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
-                System.out.print("I: ");
-                System.out.println(i);
-                i++;
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuanLyBaoHanh.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,7 +299,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
     private rojeru_san.rsbutton.RSButtonEffect search;
     private RSComponentShade.RSTextFieldShade searchBar;
     private javax.swing.JButton sua;
-    private rojeru_san.complementos.TableMetro tableMetro1;
+    private static rojeru_san.complementos.TableMetro tableMetro1;
     private javax.swing.JButton them;
     private javax.swing.JButton xoa;
     // End of variables declaration//GEN-END:variables

@@ -27,22 +27,19 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Component id="them" min="-2" pref="114" max="-2" attributes="0"/>
-                      <EmptySpace pref="68" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="listSearch" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="searchBar" min="-2" pref="256" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="search" min="-2" pref="69" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="xoa" min="-2" pref="114" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
-                              <Component id="sua" min="-2" pref="114" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace pref="136" max="32767" attributes="0"/>
+                      <Component id="xoa" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="sua" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="listSearch" min="-2" pref="232" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="searchBar" min="-2" pref="256" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="search" min="-2" pref="69" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -70,7 +67,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="373" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -111,7 +108,7 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        JTable tableTemp = (JTable)e.getSource();&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       JTable tableTemp = (JTable)e.getSource();&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;; &#xa;                       connectSQL conn = new connectSQL();&#xa;                       int a = conn.co_the_xoa_sua_pbh_nhan(temp);&#xa;                       System.out.println(a);&#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    connectSQL conn = new connectSQL();&#xa;                    ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());&#xa;                    JTable tableTemp = (JTable)e.getSource();&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                       id_xoa = temp;&#xa;                       int a = conn.co_the_xoa_sua_pbh_nhan(temp);&#xa;                       if (a == 1){&#xa;                        try{&#xa;                            rs.next();&#xa;                           int quyen = rs.getInt(1);&#xa;                           if(quyen == 2){&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                            else if(quyen == 1){&#xa;                               sua.setVisible(true);&#xa;                               xoa.setVisible(true);&#xa;                            }&#xa;                        }&#xa;                        catch(SQLException ex){&#xa;                            System.out.println(ex);&#xa;                        }&#xa;                        }else{&#xa;                           sua.setVisible(false);&#xa;                           xoa.setVisible(false);&#xa;                        } &#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
@@ -166,6 +163,9 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -224,7 +224,7 @@
     <Component class="javax.swing.JButton" name="sua">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+          <Color blue="66" green="66" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -234,14 +234,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="suaActionPerformed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="sua.setRolloverEnabled(false);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="sua.setVisible(false);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="xoa">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+          <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
@@ -251,8 +254,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xoaActionPerformed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="xoa.setRolloverEnabled(false);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="xoa.setVisible(false);"/>
       </AuxValues>
     </Component>
   </SubComponents>

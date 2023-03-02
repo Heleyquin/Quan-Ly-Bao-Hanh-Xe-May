@@ -27,6 +27,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         initComponents();
         this.insertTable();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,10 +37,12 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableQuaTrinhBH = new rojeru_san.complementos.TableMetro();
         jLabel1 = new javax.swing.JLabel();
-        MoTa = new javax.swing.JLabel();
+        phieunhan = new javax.swing.JLabel();
         searchBar = new RSComponentShade.RSTextFieldShade();
         search = new rojeru_san.rsbutton.RSButtonEffect();
         listSearch = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel3 = new javax.swing.JLabel();
+        MoTa = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,22 +102,27 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         PanelTable.setLayout(PanelTableLayout);
         PanelTableLayout.setHorizontalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+            .addGroup(PanelTableLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelTableLayout.setVerticalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+            .addGroup(PanelTableLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, 798, -1));
+        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 798, 440));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Tình trạng khi tiếp nhận:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 60, -1, 35));
+        jLabel1.setText("Số phiếu nhận:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 210, 35));
 
-        MoTa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        add(MoTa, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 60, 568, 35));
+        phieunhan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        phieunhan.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(phieunhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 568, 35));
 
         searchBar.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         searchBar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -132,6 +140,14 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         listSearch.setBackground(new java.awt.Color(153, 255, 153));
         listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nhân viên thực hiện", "Mô tả", "Thời gian" }));
         add(listSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 5, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Tình trạng khi tiếp nhận:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 35));
+
+        MoTa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        add(MoTa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 568, 35));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -170,6 +186,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         connectSQL conn = new connectSQL();
         ResultSet rs;
         DefaultTableModel dT = (DefaultTableModel) tableQuaTrinhBH.getModel();
+        phieunhan.setText(id_nhan);
         try {
             rs = conn.qua_trinh_bh(id_nhan);
             rs.next();
@@ -188,8 +205,10 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     private javax.swing.JPanel PanelTable;
     private RSComponentShade.RSButtonShade backButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private RSMaterialComponent.RSComboBoxMaterial listSearch;
+    private javax.swing.JLabel phieunhan;
     private rojeru_san.rsbutton.RSButtonEffect search;
     private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableQuaTrinhBH;

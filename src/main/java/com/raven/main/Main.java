@@ -1,6 +1,7 @@
 
 package com.raven.main;
 
+import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.CTBH_JPanel;
 import com.raven.form.QuanLyBaoHanh;
@@ -15,12 +16,8 @@ import java.awt.Color;
 import javax.swing.JComponent;
 public class Main extends javax.swing.JFrame {
     
-    private Form_Home home;
-    private QuanLyBaoHanh form1;
     private CTBH_JPanel form12;
-    private Form_KH form2;
     private Form_CTKH form22;
-    private Form_3 form3;
     private doiPass form4;
     private JFrameExit form5;
     private TBH form6;
@@ -31,10 +28,6 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setSize(1061, 690);
         setBackground(new Color(0, 0, 0, 0));
-        home = new Form_Home();
-        form1 = new QuanLyBaoHanh();
-        form2 = new Form_KH();
-        form3 = new Form_3();
         form4 = new doiPass();
         form5 = new JFrameExit();
         form6 = new TBH();
@@ -43,10 +36,10 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void selected(int index) {
                 if (index == 0) {
-                    main.setForm(home);
+                    main.setForm(new Form_Home());
                 } else if (index == 1) {
-                    if (main.getStatusBH() == 0){
-                        main.setForm(form1);
+                    if (getStatusBH() == 0){
+                        main.setForm(new QuanLyBaoHanh());
                     }
                     else if(main.getStatusBH() == 1){
                         form12 = new CTBH_JPanel();
@@ -54,7 +47,7 @@ public class Main extends javax.swing.JFrame {
                     }
                 } else if (index == 2) {
                     if(main.getStatusKH() == 0){
-                        main.setForm(form2);
+                        setForm(new Form_KH());
                     }
                     else if(main.getStatusKH() == 1){
                         form22 = new Form_CTKH();
@@ -64,7 +57,7 @@ public class Main extends javax.swing.JFrame {
                         main.setForm(form22);
                     }
                 } else if (index == 3) {
-                    main.setForm(form3);
+                    main.setForm(new Form_3());
                 } else if(index == 4){
                     main.setForm(form6);
                 } else if(index == 5){
@@ -87,8 +80,8 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new com.raven.swing.PanelBorder();
-        mainPanel = new javax.swing.JPanel();
         menu2 = new com.raven.component.Menu();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -106,8 +99,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
@@ -117,9 +110,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,41 +131,6 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Main().setVisible(true);
-//            }
-//        });
-//    }
-
     public int getStatusBH(){
         return statusBH;
     }
@@ -188,7 +145,7 @@ public class Main extends javax.swing.JFrame {
         this.statusKH = statusKH;
     }
     public void showMain(){
-        main.setForm(home);
+        main.setForm(new Form_Home());
         main.setVisible(true);
     }
     public void hideMain(){
@@ -198,7 +155,7 @@ public class Main extends javax.swing.JFrame {
         return main;
     }
     public static void reset(){
-        main = new Main();
+        main.dispose();
         statusBH = 0;
         statusKH = 0;
         System.gc();
