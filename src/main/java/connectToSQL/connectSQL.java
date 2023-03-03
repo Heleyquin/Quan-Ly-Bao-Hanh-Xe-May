@@ -45,8 +45,8 @@ public class connectSQL {
     public int timTk(String tk, String mk){
         int result = 0;
         String SQL = "{call tim_tk(?,?)}";
-        CallableStatement cs = null;
-        ResultSet rs = null;
+        CallableStatement cs;
+        ResultSet rs;
         try {
             cs = conn.prepareCall(SQL);
             cs.setString(1, tk);
@@ -61,7 +61,7 @@ public class connectSQL {
     }
     public ResultSet timnv_bang_tk(String tk){
         String SQL = "{call timnv_bang_tk(?)}";
-        CallableStatement cs = null;
+        CallableStatement cs;
         ResultSet rs = null;
         try{
             cs = conn.prepareCall(SQL);
@@ -74,7 +74,7 @@ public class connectSQL {
         return rs;
     }
     public ResultSet ds_pbh_nhan(){
-        String SQL = "SELECT * FROM xem_ds_pbh_nhan";
+        String SQL = "SELECT * FROM ds_pbh_nhan";
         Statement st;
         ResultSet rs = null;
         try {
@@ -86,9 +86,30 @@ public class connectSQL {
         return rs;
     }
     
+    public int them_kh(String maKH, String StrCCCD, String StrHo, String StrTen, Date StrNgaySinh , String StrSDT, String StrGioi, String StrMail){
+        String SQL = "{call them_kh(?,?,?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, maKH);
+            cs.setString(2, StrCCCD);
+            cs.setString(3, StrHo);
+            cs.setString(4, StrTen);
+            cs.setDate(5, new java.sql.Date(StrNgaySinh.getTime()));
+            cs.setString(6, StrSDT);
+            cs.setString(7, StrGioi);
+            cs.setString(8, StrMail);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public ResultSet qua_trinh_bh(String id_nhan){
         String SQL = "{call sp_qua_trinh_bh(?)}";
-        CallableStatement cs = null;
+        CallableStatement cs;
         ResultSet rs = null;
         try {
             cs = conn.prepareCall(SQL);
@@ -188,6 +209,25 @@ public class connectSQL {
         return rs;
     }
     
+    public int them_pbh(String maTBH, String maNV, Date tg, String makh, String tinhTrang){
+        String SQL = "{call them_pbh(?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1,maTBH);
+            cs.setString(2,maNV);
+            cs.setDate(3, new java.sql.Date(tg.getTime()));
+            cs.setString(4, makh);
+            cs.setString(5,tinhTrang);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+        
+    }
+    
     public int xoa_pbh_nhan(String id_nhan){
         String SQL = "{call xoa_pbh_nhan(?)}";
         CallableStatement cs;
@@ -248,12 +288,44 @@ public class connectSQL {
             cs.setString(3, ho);
             cs.setString(4, ten);
             cs.setDate(5, new java.sql.Date(ngaySinh.getTime()));
-            cs.setString(6, SDT);
+            if (SDT == null){
+                cs.setNull(6, java.sql.Types.VARCHAR);
+            }
+            else{
+                cs.setString(6, SDT);
+            }
             cs.setString(7, gioi);
-            cs.setString(8, mail);
+            if (mail == null){
+                cs.setNull(8, java.sql.Types.VARCHAR);
+            }
+            else{
+                cs.setString(8, mail);
+            }
             rs = cs.executeQuery();
             rs.next();
             result = rs.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int them_phieu_tra(int phieuNhan, Date ngayTra, String moTa, String nVTra){
+        String SQL = "{call them_phieu_tra(?,?,?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, phieuNhan);
+            cs.setDate(2, new java.sql.Date(ngayTra.getTime()));
+            if(moTa == null){
+                cs.setNull(3, java.sql.Types.VARCHAR);
+            }
+            else{
+                cs.setString(3, moTa);
+            }
+            cs.setString(4, nVTra);
+            result =  cs.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }

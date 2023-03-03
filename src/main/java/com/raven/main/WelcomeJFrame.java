@@ -1,6 +1,5 @@
 
 package com.raven.main;
-import com.raven.component.Menu;
 import connectToSQL.connectSQL;
 
 public class WelcomeJFrame extends javax.swing.JFrame {

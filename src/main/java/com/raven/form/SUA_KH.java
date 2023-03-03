@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class SUA_KH extends javax.swing.JFrame {
 
-    private final static String regexCCCD = "\\d{13}";
+    private final static String regexCCCD = "\\d{12}";
     private final static String regexSDT = "0\\d{9}";
     private final static String regexMail = "[A-Za-z0-9]+@gmail\\.com";
     private final static Pattern pattern1CCCD = Pattern.compile(regexCCCD);
@@ -25,6 +25,7 @@ public class SUA_KH extends javax.swing.JFrame {
     private JTable table;
     public SUA_KH(JTable table) {
         this.table = table;
+        this.setUndecorated(true);
         initComponents();
     }
 
@@ -54,8 +55,16 @@ public class SUA_KH extends javax.swing.JFrame {
         saiMail = new javax.swing.JLabel();
         saiNgay = new javax.swing.JLabel();
         saiCCCD = new javax.swing.JLabel();
+        thoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -124,6 +133,14 @@ public class SUA_KH extends javax.swing.JFrame {
         saiCCCD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saiCCCD.setForeground(new java.awt.Color(255, 0, 51));
 
+        thoat.setBackground(new java.awt.Color(255, 204, 204));
+        thoat.setText("Thoát");
+        thoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,9 +199,11 @@ public class SUA_KH extends javax.swing.JFrame {
                                     .addComponent(jLabel1MAKH5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(29, 29, 29))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(181, 181, 181)
                 .addComponent(xacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(349, 349, 349))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(thoat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +230,7 @@ public class SUA_KH extends javax.swing.JFrame {
                     .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saiNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1MAKH4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,9 +246,11 @@ public class SUA_KH extends javax.swing.JFrame {
                     .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saiMail, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(xacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(thoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(56, 56, 56))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,7 +265,7 @@ public class SUA_KH extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -258,24 +279,30 @@ public class SUA_KH extends javax.swing.JFrame {
             Matcher matcher2 = pattern1SDT.matcher(sdt.getText());
             Matcher matcher3 = pattern1Mail.matcher(mail.getText());
             if (ngaySinh.getDate() == null) {
-                saiSDT.setText("Nhập sai đinh dạng ngày, định dạng là 'Năm-Tháng-Ngày'");
+                saiNgay.setText("Nhập sai đinh dạng ngày, định dạng là 'Năm-Tháng-Ngày'");
+                saiCCCD.setText(null);
+                saiSDT.setText(null);
+                saiMail.setText(null);
             }
             if (matcher1.matches() == false) {
                 saiCCCD.setText("Nhập sai định dạng CCCD");
                 saiSDT.setText(null);
                 saiMail.setText(null);
+                saiNgay.setText(null);
             }
-            if (matcher2.matches() == false) {
+            if (matcher2.matches() == false && sdt.getText().equalsIgnoreCase("") == false) {
                 saiCCCD.setText(null);
                 saiSDT.setText("Nhập sai định dạng SĐT");
                 saiMail.setText(null);
+                saiNgay.setText(null);
             }
-            if (matcher3.matches() == false && mail.getText().equals("") == false) {
+            if (matcher3.matches() == false && mail.getText().equalsIgnoreCase("") == false) {
                 saiCCCD.setText(null);
                 saiSDT.setText(null);
                 saiMail.setText("Nhập sai định dạng email");
+                saiNgay.setText(null);
             }
-            if (ngaySinh.getDate() != null && matcher1.matches() && (matcher2.matches() || sdt.getText().equals("")) && (matcher3.matches() || mail.getText().equals(""))) {
+            if (ngaySinh.getDate() != null && matcher1.matches() && (matcher2.matches() || sdt.getText().equalsIgnoreCase("")) && (matcher3.matches() || mail.getText().equalsIgnoreCase(""))) {
                 connectSQL conn = new connectSQL();
                 String StrMaKH = jLabel1MAKH5.getText();
                 String StrCCCD = cccd.getText();
@@ -317,6 +344,21 @@ public class SUA_KH extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_xacNhanActionPerformed
 
+    private void thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoatActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát?", "Cảnh báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            this.dispose();
+        } else {
+
+        }
+    }//GEN-LAST:event_thoatActionPerformed
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_formWindowLostFocus
+
     /**
      * @param args the command line arguments
      */
@@ -349,7 +391,7 @@ public class SUA_KH extends javax.swing.JFrame {
     }
 
     public void setMKH(String mkh){
-        this.jLabel1MAKH5.setText(mkh);
+        jLabel1MAKH5.setText(mkh);
     }
     public void setCCCD(String cccd){
         this.cccd.setText(cccd);
@@ -369,7 +411,7 @@ public class SUA_KH extends javax.swing.JFrame {
         }
     }
     public void setSDT(String sdt){
-        if (sdt == null){
+        if (sdt.equalsIgnoreCase("null")){
             this.sdt.setText("");
         }
         else{
@@ -377,7 +419,7 @@ public class SUA_KH extends javax.swing.JFrame {
         }
     }
     public void setGioi(String gioiTinh){
-        if (gioiTinh.equals("Nam")){
+        if (gioiTinh.equalsIgnoreCase("Nam")){
             this.gioi.setSelectedIndex(0);
         }
         else{
@@ -385,7 +427,7 @@ public class SUA_KH extends javax.swing.JFrame {
         }
     }
     public void setEmail(String mail){
-        if (mail == null){
+        if (mail.equalsIgnoreCase("null")){
             this.mail.setText("");
         }
         else{
@@ -414,6 +456,7 @@ public class SUA_KH extends javax.swing.JFrame {
     private javax.swing.JLabel saiSDT;
     private javax.swing.JTextField sdt;
     private javax.swing.JTextField ten;
+    private javax.swing.JButton thoat;
     private javax.swing.JButton xacNhan;
     // End of variables declaration//GEN-END:variables
 }
