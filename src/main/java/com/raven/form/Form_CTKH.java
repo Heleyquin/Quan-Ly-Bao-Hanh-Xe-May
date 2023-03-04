@@ -164,7 +164,7 @@ public class Form_CTKH extends javax.swing.JPanel {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         int selectIndex = listSearch.getSelectedIndex();
-        String searchStr = search.getText();
+        String searchStr = searchBar.getText();
         System.out.println(searchStr);
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);

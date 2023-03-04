@@ -43,8 +43,7 @@ public class Card extends javax.swing.JPanel {
         lbSDT.setText(data.getSDT());
         lbGioi.setText(data.getGioi());
         lbNgayVao.setText(data.getNgayVao());
-        lbNgayNghi.setText(data.getNgayNghi());
-        lbDescription.setText(data.getDescription());
+        lbQuyen.setText(data.getQuyen());
     }
 
     @SuppressWarnings("unchecked")
@@ -54,26 +53,23 @@ public class Card extends javax.swing.JPanel {
         lbIcon = new javax.swing.JLabel();
         lbName = new javax.swing.JLabel();
         lbCCCD = new javax.swing.JLabel();
-        lbDescription = new javax.swing.JLabel();
+        lbQuyen = new javax.swing.JLabel();
         lbNgaySinh = new javax.swing.JLabel();
         lbSDT = new javax.swing.JLabel();
         lbGioi = new javax.swing.JLabel();
         lbNgayVao = new javax.swing.JLabel();
-        lbNgayNghi = new javax.swing.JLabel();
         lbName1 = new javax.swing.JLabel();
         lbCCCD1 = new javax.swing.JLabel();
         lbNgaySinh1 = new javax.swing.JLabel();
         lbSDT1 = new javax.swing.JLabel();
         lbGioi1 = new javax.swing.JLabel();
         lbNgayVao1 = new javax.swing.JLabel();
-        lbNgayNghi1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         lbIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/stock.png"))); // NOI18N
 
@@ -85,9 +81,9 @@ public class Card extends javax.swing.JPanel {
         lbCCCD.setForeground(new java.awt.Color(255, 255, 255));
         lbCCCD.setText("CCCD");
 
-        lbDescription.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        lbDescription.setForeground(new java.awt.Color(255, 255, 255));
-        lbDescription.setText("Description");
+        lbQuyen.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        lbQuyen.setForeground(new java.awt.Color(255, 255, 255));
+        lbQuyen.setText("Quyền");
 
         lbNgaySinh.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         lbNgaySinh.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,10 +100,6 @@ public class Card extends javax.swing.JPanel {
         lbNgayVao.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         lbNgayVao.setForeground(new java.awt.Color(255, 255, 255));
         lbNgayVao.setText("Ngày vào làm");
-
-        lbNgayNghi.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lbNgayNghi.setForeground(new java.awt.Color(255, 255, 255));
-        lbNgayNghi.setText("Ngày nghỉ việc");
 
         lbName1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lbName1.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,10 +125,6 @@ public class Card extends javax.swing.JPanel {
         lbNgayVao1.setForeground(new java.awt.Color(255, 255, 255));
         lbNgayVao1.setText("NGÀY VÀO LÀM");
 
-        lbNgayNghi1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lbNgayNghi1.setForeground(new java.awt.Color(255, 255, 255));
-        lbNgayNghi1.setText("NGÀY NGHỈ VIỆC");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(":");
@@ -161,10 +149,6 @@ public class Card extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText(":");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText(":");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,13 +160,9 @@ public class Card extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbNgayNghi1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(lbNgayVao1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                                         .addComponent(jLabel6))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(lbGioi1)
@@ -207,7 +187,6 @@ public class Card extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNgayVao)
-                                    .addComponent(lbNgayNghi)
                                     .addComponent(lbGioi)
                                     .addComponent(lbSDT)
                                     .addComponent(lbNgaySinh)
@@ -217,9 +196,9 @@ public class Card extends javax.swing.JPanel {
                                 .addGap(149, 149, 149)
                                 .addComponent(lbIcon))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(lbDescription)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                        .addGap(150, 150, 150)
+                        .addComponent(lbQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,15 +237,10 @@ public class Card extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbNgayVao1)
                             .addComponent(lbNgayVao)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbNgayNghi1)
-                            .addComponent(lbNgayNghi)
-                            .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbDescription)
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(jLabel6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(lbQuyen)
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -290,21 +264,18 @@ public class Card extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbCCCD;
     private javax.swing.JLabel lbCCCD1;
-    private javax.swing.JLabel lbDescription;
     private javax.swing.JLabel lbGioi;
     private javax.swing.JLabel lbGioi1;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbName;
     private javax.swing.JLabel lbName1;
-    private javax.swing.JLabel lbNgayNghi;
-    private javax.swing.JLabel lbNgayNghi1;
     private javax.swing.JLabel lbNgaySinh;
     private javax.swing.JLabel lbNgaySinh1;
     private javax.swing.JLabel lbNgayVao;
     private javax.swing.JLabel lbNgayVao1;
+    private javax.swing.JLabel lbQuyen;
     private javax.swing.JLabel lbSDT;
     private javax.swing.JLabel lbSDT1;
     // End of variables declaration//GEN-END:variables

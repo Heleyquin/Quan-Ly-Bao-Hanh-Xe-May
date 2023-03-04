@@ -162,12 +162,7 @@ public class PhieuTra extends javax.swing.JFrame {
 
     private void thoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thoatActionPerformed
         // TODO add your handling code here:
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát?", "Cảnh báo", JOptionPane.YES_NO_OPTION);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-            this.dispose();
-        } else {
-
-        }
+        this.dispose();
     }//GEN-LAST:event_thoatActionPerformed
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus

@@ -1,11 +1,16 @@
 
 package com.raven.main;
 import connectToSQL.connectSQL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WelcomeJFrame extends javax.swing.JFrame {
 
     private static String tk;
     private static String mk;
+    private static int quyen;
     public WelcomeJFrame() {
         initComponents();
     }
@@ -131,7 +136,7 @@ public class WelcomeJFrame extends javax.swing.JFrame {
             }
         });
 
-        iconWarrenty.setImagen(new javax.swing.ImageIcon(getClass().getResource("/Image/images2.jpg"))); // NOI18N
+        iconWarrenty.setImagen(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/images2.jpg"))); // NOI18N
 
         javax.swing.GroupLayout iconWarrentyLayout = new javax.swing.GroupLayout(iconWarrenty);
         iconWarrenty.setLayout(iconWarrentyLayout);
@@ -248,10 +253,25 @@ public class WelcomeJFrame extends javax.swing.JFrame {
     public String getMK(){
         return mk;
     }
+    public int getQuyen(){
+        return quyen;
+    }
+    public void setQuyen(){
+        connectSQL conn = new connectSQL();
+        ResultSet rs;
+        rs = conn.quyen_tk(tk);
+        try {
+            rs.next();
+            quyen = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(WelcomeJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
         this.setTK();
         this.setMK();
+        this.setQuyen();
         connectSQL conn = new connectSQL();
         int result = conn.timTk(tk, mk);
         if (result == 1){

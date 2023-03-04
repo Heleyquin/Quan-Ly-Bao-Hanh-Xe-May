@@ -273,7 +273,7 @@ public class Form_KH extends javax.swing.JPanel {
                             System.out.println(ex);
                         }
                     }else{
-                        sua.setVisible(false);
+                        sua.setVisible(true);
                         xoa.setVisible(false);
                     }
                 }
@@ -338,7 +338,7 @@ public class Form_KH extends javax.swing.JPanel {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         int selectIndex = listSearch.getSelectedIndex();
-        String searchStr = search.getText();
+        String searchStr = searchBar.getText();
         System.out.println(searchStr);
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
@@ -431,7 +431,6 @@ public class Form_KH extends javax.swing.JPanel {
                 String StrGioi = gioiKH.getSelectedItem().toString();
                 String StrMail = mailKH.getText();
                 int result = conn.them_kh(maKH, StrCCCD, StrHo, StrTen, StrNgaySinh, StrSDT, StrGioi, StrMail);
-                System.out.println(result);
                 if (result > 0) {
                     JOptionPane.showMessageDialog(null, "Thêm hoàn tất", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                     ThemKH.dispose();
@@ -471,17 +470,17 @@ public class Form_KH extends javax.swing.JPanel {
         DefaultTableModel dT = (DefaultTableModel) tableMetro1.getModel();
         connectSQL conn = new connectSQL();
         ResultSet rs = conn.ds_kh();
-        String maKH, cCCD , ten, ngaySinh, email, sdt, gioi;
+        String maKH, cCCD , tenn, ngay, email, so, gioiT;
         try {
             while(rs.next()){
                 maKH = rs.getString("MaKH");
                 cCCD =rs.getString("CCCD");
-                ten = rs.getString("Ho") + " " + rs.getString("Ten");
-                ngaySinh = rs.getString("NgaySinh");
-                sdt = rs.getString("SDT");
+                tenn = rs.getString("Ho") + " " + rs.getString("Ten");
+                ngay = rs.getString("NgaySinh");
+                so = rs.getString("SDT");
                 email = rs.getString("Email");
-                gioi = rs.getString("Gioi");
-                dT.addRow(new Object[] {maKH, cCCD, ten, ngaySinh, sdt, gioi, email});
+                gioiT = rs.getString("Gioi");
+                dT.addRow(new Object[] {maKH, cCCD, tenn, ngay, so, gioiT, email});
             }
         } catch (SQLException ex) {
             Logger.getLogger(Form_KH.class.getName()).log(Level.SEVERE, null, ex);

@@ -367,7 +367,7 @@
             <Container class="rojeru_san.rspanel.RSPanelImage" name="iconWarrenty">
               <Properties>
                 <Property name="imagen" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Image/images2.jpg"/>
+                  <Image iconType="3" name="/com/raven/icon/images2.jpg"/>
                 </Property>
               </Properties>
 

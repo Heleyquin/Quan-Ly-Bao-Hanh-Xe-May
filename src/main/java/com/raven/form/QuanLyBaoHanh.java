@@ -82,8 +82,9 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         sua = new javax.swing.JButton();
 
         ThemPBH.setModal(true);
+        ThemPBH.setPreferredSize(new java.awt.Dimension(815, 460));
         ThemPBH.setResizable(false);
-        ThemPBH.setSize(new java.awt.Dimension(815, 400));
+        ThemPBH.setSize(new java.awt.Dimension(815, 460));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(136, 25));
@@ -185,7 +186,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                     .addComponent(tinhTrang, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         connectSQL conTBH = new connectSQL();
@@ -219,7 +220,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         );
         ThemPBHLayout.setVerticalGroup(
             ThemPBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
         ThemPBH.setLocationRelativeTo(null);
@@ -292,9 +293,15 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                 JTable tableTemp = (JTable)e.getSource();
                 if (e.getClickCount() == 2 && indexRow >= 0) {
                     String temp = tableTemp.getModel().getValueAt(indexRow, 0)+"";
+                    String nvTra = tableTemp.getModel().getValueAt(indexRow, 4)+"";
                     Main main = new Main();
                     id_nhan = temp;
                     CTBH_JPanel CTBH = new CTBH_JPanel();
+                    if(nvTra.equalsIgnoreCase("null")){
+                        CTBH.showUpdate();
+                    }else{
+                        CTBH.hideUpdate();
+                    }
                     main.getMain().setForm(CTBH);
                     main.setStatusBH(1);
                 }else if(e.getClickCount() == 1){
@@ -344,7 +351,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         });
 
         listSearch.setBackground(new java.awt.Color(255, 204, 204));
-        listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã phiếu nhận", "Mã thẻ bảo hành", "Nhân viên nhận", "Ngày tiếp nhận", "Nhân viên trả", "Ngày trả" }));
+        listSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mã phiếu nhận", "Mã thẻ bảo hành", "Nhân viên nhận", "Ngày tiếp nhận", "Nhân viên trả", "Ngày trả", "Mã khách hàng", "Tình trạng khi trả", " " }));
 
         them.setBackground(new java.awt.Color(51, 255, 51));
         them.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -396,26 +403,23 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 198, Short.MAX_VALUE)
-                                .addComponent(listSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGap(0, 204, Short.MAX_VALUE)
+                                .addComponent(listSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(106, 106, 106)
-                                .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(laptra)
                                 .addGap(89, 89, 89)
-                                .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)))))
+                                .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -431,9 +435,9 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                     .addComponent(xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sua, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -473,7 +477,6 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         // TODO add your handling code here:
         PhieuTra themphieu = new PhieuTra(tableMetro1);
         themphieu.setVisible(true);
-        themphieu.setLocationRelativeTo(null);
         themphieu.setMapn(id_xoa);
     }//GEN-LAST:event_laptraActionPerformed
 

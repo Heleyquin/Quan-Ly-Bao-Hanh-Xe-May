@@ -5,9 +5,12 @@
     <Container class="javax.swing.JDialog" name="ThemPBH">
       <Properties>
         <Property name="modal" type="boolean" value="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[815, 460]"/>
+        </Property>
         <Property name="resizable" type="boolean" value="false"/>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[815, 400]"/>
+          <Dimension value="[815, 460]"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -22,7 +25,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel1" alignment="0" pref="400" max="32767" attributes="0"/>
+              <Component id="jPanel1" alignment="0" pref="430" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -106,7 +109,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="xacnhan" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -262,16 +265,14 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="198" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="204" max="32767" attributes="0"/>
                               <Component id="listSearch" min="-2" pref="232" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="them" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                               <Component id="xoa" min="-2" pref="114" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -279,13 +280,12 @@
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="searchBar" min="-2" pref="256" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="search" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="search" min="-2" pref="68" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="laptra" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="sua" min="-2" pref="114" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -309,9 +309,9 @@
                   <Component id="them" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="sua" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="387" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -354,7 +354,7 @@
             <Property name="colorFilasBackgound2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.getColumnModel().getColumn(0).setPreferredWidth(50);&#xa;tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    connectSQL conn = new connectSQL();&#xa;                    ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());&#xa;                    JTable tableTemp = (JTable)e.getSource();&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                       tbh = tableTemp.getModel().getValueAt(indexRow, 1)+&quot;&quot;;&#xa;                       nVNhan = tableTemp.getModel().getValueAt(indexRow, 2)+&quot;&quot;;&#xa;                       ngayNhan = tableTemp.getModel().getValueAt(indexRow, 3)+&quot;&quot;;&#xa;                       nVTra = tableTemp.getModel().getValueAt(indexRow, 4)+&quot;&quot;;&#xa;                       ngayTra = tableTemp.getModel().getValueAt(indexRow, 5) + &quot;&quot;;&#xa;                       id_xoa = temp;&#xa;                       int a = conn.co_the_xoa_sua_pbh_nhan(temp);&#xa;                       if (a == 1){&#xa;                        try{&#xa;                            rs.next();&#xa;                           int quyen = rs.getInt(1);&#xa;                           if(quyen == 2){&#xa;                               laptra.setVisible(true);&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                            else if(quyen == 1){&#xa;                               laptra.setVisible(true);&#xa;                               xoa.setVisible(true);&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                        }&#xa;                        catch(SQLException ex){&#xa;                            System.out.println(ex);&#xa;                        }&#xa;                        }else{&#xa;                           laptra.setVisible(false);&#xa;                           xoa.setVisible(false);&#xa;                           sua.setVisible(false);&#xa;                        } &#xa;                    }&#xa;                }&#xa;            });">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tableMetro1.getColumnModel().getColumn(0).setPreferredWidth(50);&#xa;tableMetro1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);&#xa;tableMetro1.addMouseListener(new MouseAdapter() {&#xa;                public void mouseClicked(MouseEvent e) {&#xa;                    int indexRow = tableMetro1.rowAtPoint(e.getPoint());&#xa;                    connectSQL conn = new connectSQL();&#xa;                    ResultSet rs = conn.quyen_tk(new com.raven.main.WelcomeJFrame().getTK());&#xa;                    JTable tableTemp = (JTable)e.getSource();&#xa;                    if (e.getClickCount() == 2 &amp;&amp; indexRow &gt;= 0) {&#xa;                        String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                        String nvTra = tableTemp.getModel().getValueAt(indexRow, 4)+&quot;&quot;;&#xa;                        Main main = new Main();&#xa;                        id_nhan = temp;&#xa;                        CTBH_JPanel CTBH = new CTBH_JPanel();&#xa;                        if(nvTra.equalsIgnoreCase(&quot;null&quot;)){&#xa;                            CTBH.showUpdate();&#xa;                        }else{&#xa;                            CTBH.hideUpdate();&#xa;                        }&#xa;                        main.getMain().setForm(CTBH);&#xa;                        main.setStatusBH(1);&#xa;                    }else if(e.getClickCount() == 1){&#xa;                       String temp = tableTemp.getModel().getValueAt(indexRow, 0)+&quot;&quot;;&#xa;                       tbh = tableTemp.getModel().getValueAt(indexRow, 1)+&quot;&quot;;&#xa;                       nVNhan = tableTemp.getModel().getValueAt(indexRow, 2)+&quot;&quot;;&#xa;                       ngayNhan = tableTemp.getModel().getValueAt(indexRow, 3)+&quot;&quot;;&#xa;                       nVTra = tableTemp.getModel().getValueAt(indexRow, 4)+&quot;&quot;;&#xa;                       ngayTra = tableTemp.getModel().getValueAt(indexRow, 5) + &quot;&quot;;&#xa;                       id_xoa = temp;&#xa;                       int a = conn.co_the_xoa_sua_pbh_nhan(temp);&#xa;                       if (a == 1){&#xa;                        try{&#xa;                            rs.next();&#xa;                           int quyen = rs.getInt(1);&#xa;                           if(quyen == 2){&#xa;                               laptra.setVisible(true);&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                            else if(quyen == 1){&#xa;                               laptra.setVisible(true);&#xa;                               xoa.setVisible(true);&#xa;                               sua.setVisible(true);&#xa;                            }&#xa;                        }&#xa;                        catch(SQLException ex){&#xa;                            System.out.println(ex);&#xa;                        }&#xa;                        }else{&#xa;                           laptra.setVisible(false);&#xa;                           xoa.setVisible(false);&#xa;                           sua.setVisible(false);&#xa;                        } &#xa;                    }&#xa;                }&#xa;            });">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="150" resizable="true">
                   <Title/>
@@ -452,13 +452,16 @@
           <Color blue="cc" green="cc" red="ff" type="rgb"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
+          <StringArray count="9">
             <StringItem index="0" value="M&#xe3; phi&#x1ebf;u nh&#x1ead;n"/>
             <StringItem index="1" value="M&#xe3; th&#x1ebb; b&#x1ea3;o h&#xe0;nh"/>
             <StringItem index="2" value="Nh&#xe2;n vi&#xea;n nh&#x1ead;n"/>
             <StringItem index="3" value="Ng&#xe0;y ti&#x1ebf;p nh&#x1ead;n"/>
             <StringItem index="4" value="Nh&#xe2;n vi&#xea;n tr&#x1ea3;"/>
             <StringItem index="5" value="Ng&#xe0;y tr&#x1ea3;"/>
+            <StringItem index="6" value="M&#xe3; kh&#xe1;ch h&#xe0;ng"/>
+            <StringItem index="7" value="T&#xec;nh tr&#x1ea1;ng khi tr&#x1ea3;"/>
+            <StringItem index="8" value=" "/>
           </StringArray>
         </Property>
       </Properties>

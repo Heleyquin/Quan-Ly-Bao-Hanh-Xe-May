@@ -28,12 +28,12 @@ public class Nhan_Vien {
         this.email = email;
     }
 
-    public String getDescription() {
-        return description;
+    public String getQuyen() {
+        return quyen;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuyen(String description) {
+        this.quyen = quyen;
     }
 
     public String getNgaySinh(){
@@ -60,13 +60,7 @@ public class Nhan_Vien {
     public void setNgayVao(String ngayVao){
         this.ngayVao = ngayVao;
     }
-    public String getNgayNghi(){
-        return ngayNghi;
-    }
-    public void setNgayNghi(String ngayNghi){
-        this.ngayNghi = ngayNghi;
-    }
-    public Nhan_Vien(Icon icon, String ten, String email, String ngaySinh, String sdt, String gioi, String ngayVao, String ngayNghi, String description) {
+    public Nhan_Vien(Icon icon, String ten, String email, String ngaySinh, String sdt, String gioi, String ngayVao, String quyen) {
         this.icon = icon;
         this.ten = ten;
         this.email = email;
@@ -74,8 +68,7 @@ public class Nhan_Vien {
         this.sdt = sdt;
         this.gioi = gioi;
         this.ngayVao = ngayVao;
-        this.ngayNghi = ngayNghi;
-        this.description = description;
+        this.quyen = quyen;
     }
 
     public Nhan_Vien() {
@@ -88,6 +81,5 @@ public class Nhan_Vien {
     private String sdt;
     private String gioi;
     private String ngayVao;
-    private String ngayNghi;
-    private String description;
+    private String quyen;
 }

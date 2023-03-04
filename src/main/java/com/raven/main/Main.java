@@ -1,7 +1,6 @@
 
 package com.raven.main;
 
-import com.raven.component.Menu;
 import com.raven.event.EventMenuSelected;
 import com.raven.form.CTBH_JPanel;
 import com.raven.form.QuanLyBaoHanh;
@@ -10,17 +9,17 @@ import com.raven.form.Form_3;
 import com.raven.form.Form_CTKH;
 import com.raven.form.Form_Home;
 import com.raven.form.JFrameExit;
+import com.raven.form.NangCao;
 import com.raven.form.TBH;
 import com.raven.form.doiPass;
 import java.awt.Color;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 public class Main extends javax.swing.JFrame {
     
     private CTBH_JPanel form12;
     private Form_CTKH form22;
-    private doiPass form4;
     private JFrameExit form5;
-    private TBH form6;
     static Main main = new Main();
     static int statusBH = 0;//Lưu trạng thai của form, 0 là Form QLBH, 1 là Form CTBH
     static int statusKH = 0;//0 ở Form_KhachHang, 1 ở Form CTKH
@@ -28,9 +27,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setSize(1061, 690);
         setBackground(new Color(0, 0, 0, 0));
-        form4 = new doiPass();
         form5 = new JFrameExit();
-        form6 = new TBH();
         menu2.initMoving(Main.this);
         menu2.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -59,10 +56,16 @@ public class Main extends javax.swing.JFrame {
                 } else if (index == 3) {
                     main.setForm(new Form_3());
                 } else if(index == 4){
-                    main.setForm(form6);
+                    main.setForm(new TBH());
                 } else if(index == 5){
-                    main.setForm(form4);
-                } else if(index == 7){
+                    main.setForm(new doiPass());
+                } else if(index == 6){
+                    if(new WelcomeJFrame().getQuyen() == 1){
+                        main.setForm(new NangCao());
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Bạn không có quyền này", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    }    
+                } else if(index == 8){
                     form5.setVisible(true);
                 }
             }
@@ -99,19 +102,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,9 +121,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

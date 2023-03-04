@@ -1,6 +1,7 @@
 
 package connectToSQL;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -209,6 +210,93 @@ public class connectSQL {
         return rs;
     }
     
+    public ResultSet ds_nv(){
+        String SQL = "SELECT * FROM NhanVien";
+        Statement st;
+        ResultSet rs = null;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet xem_tk(String tk){
+        String SQL = "{call xem_tk(?)}";
+        CallableStatement cs;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, tk);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+
+    }
+    
+    public int them_nv(String manv, String ho, String ten, Date ngaySinh, String sdt, String email, Date tgvao, String gioi){
+        String SQL = "{call them_nv(?,?,?,?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, manv);
+            cs.setString(2, ho);
+            cs.setString(3, ten);
+            cs.setDate(4, new java.sql.Date(ngaySinh.getTime()));
+            if(sdt.equalsIgnoreCase("null") || sdt.isBlank()){
+                cs.setNull(5, java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(5, sdt);
+            }
+            if (email.equalsIgnoreCase("null") || email.isBlank()) {
+                cs.setNull(6, java.sql.Types.VARCHAR);
+            } else {
+                cs.setString(6, email);
+            }
+            cs.setDate(7, new java.sql.Date(tgvao.getTime()));
+            cs.setNull(8, java.sql.Types.DATE);
+            cs.setString(9, gioi);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int them_tk(String manv){
+        String SQl = "{call them_tk(?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQl);
+            cs.setString(1, manv);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int doi_quyen(String tentk, int id_quyen){
+        String SQL = "{call doi_quyen(?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, tentk);
+            cs.setInt(2, id_quyen);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
     public int them_pbh(String maTBH, String maNV, Date tg, String makh, String tinhTrang){
         String SQL = "{call them_pbh(?,?,?,?,?)}";
         CallableStatement cs;
@@ -276,6 +364,56 @@ public class connectSQL {
         
     }
     
+    public int nghi_viec(String manv){
+        String SQL = "{call nghi_viec(?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, manv);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int sua_nv(String manv, String ho, String ten, String sdt, String email, String gioi, Date ngaySinh){
+        String SQL = "{call sua_nv(?,?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, manv);
+            if(ho.equalsIgnoreCase("")){
+                cs.setNull(2,java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(2,ho);
+            }
+            if(ten.equalsIgnoreCase("")){
+                cs.setNull(3,java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(3,ten);
+            }
+            if(sdt.equalsIgnoreCase("")){
+                cs.setNull(4, java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(4, sdt);
+            }
+            if(email.equalsIgnoreCase("")){
+                cs.setNull(5, java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(5, email);
+            }
+            cs.setString(6, gioi);
+            cs.setDate(7, new java.sql.Date(ngaySinh.getTime()));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
     public int sua_kh(String makh, String cccd, String ho, String ten, String gioi, String mail, Date ngaySinh, String SDT){
         String SQL = "{call sua_kh(?,?,?,?,?,?,?,?)}";
         CallableStatement cs;
@@ -333,7 +471,7 @@ public class connectSQL {
     }
     
     public ResultSet ds_tbh(){
-        String SQL = "SELECT MaTBH FROM TheBH";
+        String SQL = "SELECT MaTBH FROM TheBH WHERE DATEDIFF(DAY,GETDATE(), NgayHetHan) > 0 and DATEDIFF(DAY,GETDATE(), NgayBatDau) <= 0";
         Statement st;
         ResultSet rs = null;
         try {
@@ -343,6 +481,24 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return rs;
+    }
+    
+    public int them_qua_trinh(String id_nhan, Date tg, String mota, String manv, String gia){
+        String SQL = "{call them_qua_trinh(?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, Integer.parseInt(id_nhan));
+            cs.setDate(2, new java.sql.Date(tg.getTime()));
+            cs.setString(3, mota);
+            cs.setString(4, manv);
+            cs.setBigDecimal(5,  new BigDecimal(gia));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
     }
     
     public int co_the_xoa_kh(String makh){

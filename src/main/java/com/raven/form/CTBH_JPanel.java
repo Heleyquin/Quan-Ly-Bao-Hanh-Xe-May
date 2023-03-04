@@ -10,8 +10,10 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +34,15 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        capNhatQuaTrinh = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        clock1 = new com.raven.component.Clock();
+        moTaThem = new javax.swing.JTextField();
+        chiPhiThem = new javax.swing.JTextField();
+        xacnhan = new javax.swing.JButton();
         backButton = new RSComponentShade.RSButtonShade();
         PanelTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -43,6 +54,94 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         listSearch = new RSMaterialComponent.RSComboBoxMaterial();
         jLabel3 = new javax.swing.JLabel();
         MoTa = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tong_tien = new javax.swing.JLabel();
+        capnhat = new javax.swing.JButton();
+
+        capNhatQuaTrinh.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        capNhatQuaTrinh.setModal(true);
+        capNhatQuaTrinh.setSize(new java.awt.Dimension(847, 400));
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 204));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Mô tả:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Thời gian:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Chi phí(Nếu có):");
+
+        clock1.setBackground(new java.awt.Color(255, 153, 204));
+        clock1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        moTaThem.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        chiPhiThem.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        xacnhan.setBackground(new java.awt.Color(255, 255, 0));
+        xacnhan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        xacnhan.setText("Xác nhận");
+        xacnhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xacnhanActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(clock1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                    .addComponent(moTaThem)
+                    .addComponent(chiPhiThem))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(364, Short.MAX_VALUE)
+                .addComponent(xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(360, 360, 360))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(moTaThem, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clock1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chiPhiThem, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
+        javax.swing.GroupLayout capNhatQuaTrinhLayout = new javax.swing.GroupLayout(capNhatQuaTrinh.getContentPane());
+        capNhatQuaTrinh.getContentPane().setLayout(capNhatQuaTrinhLayout);
+        capNhatQuaTrinhLayout.setHorizontalGroup(
+            capNhatQuaTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        capNhatQuaTrinhLayout.setVerticalGroup(
+            capNhatQuaTrinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        capNhatQuaTrinh.setLocationRelativeTo(null);
 
         setBackground(new java.awt.Color(102, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,14 +164,14 @@ public class CTBH_JPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nhân viên thực hiện", "Mô Tả", "Thời gian"
+                "Nhân viên thực hiện", "Mô Tả", "Thời gian", "Chi phí(Nếu có)"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -103,18 +202,18 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         PanelTableLayout.setHorizontalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTableLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         PanelTableLayout.setVerticalGroup(
             PanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTableLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 168, 798, 440));
+        add(PanelTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 218, 798, 390));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Số phiếu nhận:");
@@ -148,6 +247,24 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         MoTa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         MoTa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         add(MoTa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 568, 35));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Tổng tiền:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 100, 30));
+
+        tong_tien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(tong_tien, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 690, 40));
+
+        capnhat.setBackground(new java.awt.Color(204, 204, 255));
+        capnhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        capnhat.setText("Updates");
+        capnhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capnhatActionPerformed(evt);
+            }
+        });
+        add(capnhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 110, 40));
+        capnhat.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -161,13 +278,44 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         int selectIndex = listSearch.getSelectedIndex();
-        String searchStr = search.getText();
-        System.out.println(searchStr);
+        String searchStr = searchBar.getText();
         DefaultTableModel dT = (DefaultTableModel) tableQuaTrinhBH.getModel();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(dT);
         tableQuaTrinhBH.setRowSorter(sorter);
         sorter.setRowFilter(RowFilter.regexFilter(searchStr, selectIndex));
     }//GEN-LAST:event_searchActionPerformed
+
+    private void xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xacnhanActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Xác nhận muốn thêm", "Cảnh báo", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            String id_nhan = phieunhan.getText();
+            Date tg = clock1.getDate();
+            String mota = moTaThem.getText();
+            String chiphi = chiPhiThem.getText();
+            String manv = new com.raven.main.WelcomeJFrame().getTK();
+            connectSQL conn = new connectSQL();
+            int result = conn.them_qua_trinh(id_nhan, tg, mota, manv, chiphi);
+            if (result > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                capNhatQuaTrinh.dispose();
+                DefaultTableModel model = (DefaultTableModel) tableQuaTrinhBH.getModel();
+                model.setRowCount(0);
+                this.insertTable();
+                capNhatQuaTrinh.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Thêm thất bại", "Không thành công", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+
+        }
+    }//GEN-LAST:event_xacnhanActionPerformed
+
+    private void capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capnhatActionPerformed
+        // TODO add your handling code here:
+        capNhatQuaTrinh.setVisible(true);
+    }//GEN-LAST:event_capnhatActionPerformed
 
     @Override
     protected void paintChildren(Graphics grphcs) {
@@ -180,6 +328,12 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
+    public void showUpdate(){
+        capnhat.setVisible(true);
+    }
+    public void hideUpdate(){
+        capnhat.setVisible(false);
+    }
     public void insertTable(){
         QuanLyBaoHanh QLBH = new QuanLyBaoHanh();
         String id_nhan = QLBH.getId_nhan();
@@ -191,9 +345,10 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             rs = conn.qua_trinh_bh(id_nhan);
             rs.next();
             MoTa.setText(rs.getString(1));
-            dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
+            tong_tien.setText(rs.getString(8));
+            dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(7)});
             while(rs.next()){
-                dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4)});
+                dT.addRow(new Object[] {rs.getString(6), rs.getString(5), rs.getString(4), rs.getString(7)});
             }
         } catch (SQLException ex) {
             Logger.getLogger(CTBH_JPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -204,13 +359,25 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     private javax.swing.JLabel MoTa;
     private javax.swing.JPanel PanelTable;
     private RSComponentShade.RSButtonShade backButton;
+    private javax.swing.JDialog capNhatQuaTrinh;
+    private javax.swing.JButton capnhat;
+    private javax.swing.JTextField chiPhiThem;
+    private com.raven.component.Clock clock1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private RSMaterialComponent.RSComboBoxMaterial listSearch;
+    private javax.swing.JTextField moTaThem;
     private javax.swing.JLabel phieunhan;
     private rojeru_san.rsbutton.RSButtonEffect search;
     private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableQuaTrinhBH;
+    private javax.swing.JLabel tong_tien;
+    private javax.swing.JButton xacnhan;
     // End of variables declaration//GEN-END:variables
 }

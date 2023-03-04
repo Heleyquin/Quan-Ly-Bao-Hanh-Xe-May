@@ -17,6 +17,13 @@ public class Form_Home extends javax.swing.JPanel {
         conn = new connectSQL();
         WelcomeJFrame welcom = new WelcomeJFrame();
         String tk = welcom.getTK();
+        int quyen = new com.raven.main.WelcomeJFrame().getQuyen();
+        String quyenStr;
+        if(quyen == 1){
+            quyenStr = "Quản trị";
+        }else{
+            quyenStr = "Nhân viên";
+        }
         ResultSet rs = conn.timnv_bang_tk(tk);
         String name = null, email = null, SDT = null, gioi = null, ngaySinh = null, ngayVaoLam = null;
         try {
@@ -29,7 +36,7 @@ public class Form_Home extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        card1.setData(new Nhan_Vien(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), name, email, ngaySinh, SDT, gioi, ngayVaoLam, "------------", "Increased by 60%"));
+        card1.setData(new Nhan_Vien(new ImageIcon(getClass().getResource("/com/raven/icon/stock.png")), name, email, ngaySinh, SDT, gioi, ngayVaoLam, quyenStr));
     }
 
     
