@@ -103,7 +103,37 @@ public class connectSQL {
             cs.setString(8, StrMail);
             result = cs.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public ResultSet ds_mau(String model){
+        String SQL = "{call ds_mau(?)}";
+        ResultSet rs = null;
+        CallableStatement cs;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, model);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public int sua_tt_xe(String kx, Date namsx, String mamau){
+        String SQL = "{call sua_tt_xe(?,?,?)}";
+        CallableStatement cs;
+        int result = -1;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, kx);
+            cs.setDate(2, new java.sql.Date(namsx.getTime()));
+            cs.setInt(3, Integer.parseInt(mamau));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
         }
         return result;
     }
@@ -137,7 +167,7 @@ public class connectSQL {
     
     public ResultSet sp_ct_kh(String makh){
         String SQL = "{call sp_ct_kh(?)}";
-        CallableStatement cs = null;
+        CallableStatement cs;
         ResultSet rs = null;
         try {
             cs = conn.prepareCall(SQL);
@@ -145,6 +175,51 @@ public class connectSQL {
             rs = cs.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet ds_model(){
+        String SQL = "SELECT MaModel FROM Model";
+        ResultSet rs = null;
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public int them_xe_tbh(String kx, String model, Date nam, String mau, String tbh, Date han){
+        String SQL = "{call them_xe_tbh(?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1,kx);
+            cs.setString(2,model);
+            cs.setDate(3, new java.sql.Date(nam.getTime()));
+            cs.setInt(4, Integer.parseInt(mau));
+            cs.setString(5, tbh);
+            cs.setDate(6, new java.sql.Date(han.getTime()));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public ResultSet xem_model(String ma){
+        String SQL = "{call xem_model(?)}";
+        ResultSet rs = null;
+        CallableStatement cs;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, ma);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
     }
@@ -161,6 +236,21 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return rs;
+    }
+    
+    public int changePass(String pass, String tk){
+        String SQL = "{call updatesPass(?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, pass);
+            cs.setString(2, tk);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
     }
     
     public ResultSet updatePass(String pass){
@@ -277,7 +367,22 @@ public class connectSQL {
             cs.setString(1, manv);
             result = cs.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int sua_TT(int tt, String tk){
+        String SQL = "{call suaTT(?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, tt);
+            cs.setString(2, tk);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
         }
         return result;
     }
@@ -376,6 +481,19 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return result;
+    }
+    
+    public ResultSet ds_xe(){
+        String SQL = "SELECT * FROM Xe";
+        Statement st;
+        ResultSet rs = null;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(SQL);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
     }
     
     public int sua_nv(String manv, String ho, String ten, String sdt, String email, String gioi, Date ngaySinh){
@@ -493,7 +611,11 @@ public class connectSQL {
             cs.setDate(2, new java.sql.Date(tg.getTime()));
             cs.setString(3, mota);
             cs.setString(4, manv);
-            cs.setBigDecimal(5,  new BigDecimal(gia));
+            if(gia.equalsIgnoreCase("null") || gia.isEmpty()){
+                cs.setNull(5, java.sql.Types.DECIMAL);
+            }else{
+                cs.setBigDecimal(5,  new BigDecimal(gia));
+            }
             result = cs.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.toString());

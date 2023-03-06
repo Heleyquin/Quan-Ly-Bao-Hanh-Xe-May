@@ -18,13 +18,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import java.util.regex.*;
 
-/**
- *
- * @author daica
- */
+
 public class CTBH_JPanel extends javax.swing.JPanel {
-
+    private static final String regexGia = "[1-9]\\d*";
+    private final static Pattern patternGia = Pattern.compile(regexGia);
     public CTBH_JPanel() {
         initComponents();
         this.insertTable();
@@ -43,6 +42,8 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         moTaThem = new javax.swing.JTextField();
         chiPhiThem = new javax.swing.JTextField();
         xacnhan = new javax.swing.JButton();
+        saiGia = new javax.swing.JLabel();
+        saiMota = new javax.swing.JLabel();
         backButton = new RSComponentShade.RSButtonShade();
         PanelTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -89,26 +90,36 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             }
         });
 
+        saiGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saiGia.setForeground(new java.awt.Color(255, 51, 51));
+
+        saiMota.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saiMota.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(clock1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
-                    .addComponent(moTaThem)
-                    .addComponent(chiPhiThem))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(364, Short.MAX_VALUE)
                 .addComponent(xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(360, 360, 360))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saiMota, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saiGia, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(clock1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                            .addComponent(moTaThem)
+                            .addComponent(chiPhiThem))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,15 +128,19 @@ public class CTBH_JPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(moTaThem, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addComponent(saiMota, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clock1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chiPhiThem, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                    .addComponent(chiPhiThem, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saiGia, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(xacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -289,6 +304,17 @@ public class CTBH_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int dialogResult = JOptionPane.showConfirmDialog(null, "Xác nhận muốn thêm", "Cảnh báo", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
+            Matcher matcher1 = patternGia.matcher(chiPhiThem.getText());
+            if(moTaThem.getText().isEmpty()){
+                saiMota.setText("Không được để trống");
+                saiGia.setText(null);
+            }
+            if (matcher1.matches() == false && (chiPhiThem.getText().isEmpty() == false )){
+                saiGia.setText("Giá tiền không hợp lệ");
+                saiMota.setText(null);
+            }if(moTaThem.getText().isEmpty() == false && (matcher1.matches() == false || chiPhiThem.getText().isEmpty() == true)){
+            saiGia.setText(null);
+            saiMota.setText(null);
             String id_nhan = phieunhan.getText();
             Date tg = clock1.getDate();
             String mota = moTaThem.getText();
@@ -307,13 +333,16 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null, "Thêm thất bại", "Không thành công", JOptionPane.INFORMATION_MESSAGE);
             }
-        } else {
-
+        }
+        }else{
+            
         }
     }//GEN-LAST:event_xacnhanActionPerformed
 
     private void capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capnhatActionPerformed
         // TODO add your handling code here:
+        moTaThem.setText(null);
+        chiPhiThem.setText(null);
         capNhatQuaTrinh.setVisible(true);
     }//GEN-LAST:event_capnhatActionPerformed
 
@@ -374,6 +403,8 @@ public class CTBH_JPanel extends javax.swing.JPanel {
     private RSMaterialComponent.RSComboBoxMaterial listSearch;
     private javax.swing.JTextField moTaThem;
     private javax.swing.JLabel phieunhan;
+    private javax.swing.JLabel saiGia;
+    private javax.swing.JLabel saiMota;
     private rojeru_san.rsbutton.RSButtonEffect search;
     private RSComponentShade.RSTextFieldShade searchBar;
     private rojeru_san.complementos.TableMetro tableQuaTrinhBH;

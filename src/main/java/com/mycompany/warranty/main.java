@@ -2,10 +2,8 @@
 package com.mycompany.warranty;
 
 import com.raven.main.WelcomeJFrame;
-import connectToSQL.connectSQL;
-import java.sql.ResultSet;
-
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 
 public class main {
 

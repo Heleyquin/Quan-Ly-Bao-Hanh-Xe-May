@@ -220,7 +220,7 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         );
         ThemPBHLayout.setVerticalGroup(
             ThemPBHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         ThemPBH.setLocationRelativeTo(null);

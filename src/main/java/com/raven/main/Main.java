@@ -5,13 +5,14 @@ import com.raven.event.EventMenuSelected;
 import com.raven.form.CTBH_JPanel;
 import com.raven.form.QuanLyBaoHanh;
 import com.raven.form.Form_KH;
-import com.raven.form.Form_3;
 import com.raven.form.Form_CTKH;
 import com.raven.form.Form_Home;
 import com.raven.form.JFrameExit;
 import com.raven.form.NangCao;
 import com.raven.form.TBH;
+import com.raven.form.Xe;
 import com.raven.form.doiPass;
+import com.raven.form.modelXe;
 import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -20,14 +21,17 @@ public class Main extends javax.swing.JFrame {
     private CTBH_JPanel form12;
     private Form_CTKH form22;
     private JFrameExit form5;
+    private modelXe form33;
     static Main main = new Main();
     static int statusBH = 0;//Lưu trạng thai của form, 0 là Form QLBH, 1 là Form CTBH
     static int statusKH = 0;//0 ở Form_KhachHang, 1 ở Form CTKH
+    static int statusXe = 0;//0 ở Xe, 1 ở Model
     public Main() {
         initComponents();
         this.setSize(1061, 690);
         setBackground(new Color(0, 0, 0, 0));
         form5 = new JFrameExit();
+        form33 = new modelXe();
         menu2.initMoving(Main.this);
         menu2.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -54,7 +58,12 @@ public class Main extends javax.swing.JFrame {
                         main.setForm(form22);
                     }
                 } else if (index == 3) {
-                    main.setForm(new Form_3());
+                    if (statusXe == 0){
+                        main.setForm(new Xe());
+                    }else if (statusXe == 1){
+                        form33.fillText();
+                        main.setForm(form33);
+                    }
                 } else if(index == 4){
                     main.setForm(new TBH());
                 } else if(index == 5){
@@ -141,6 +150,13 @@ public class Main extends javax.swing.JFrame {
     public void setStatusKH(int statusKH){
         this.statusKH = statusKH;
     }
+    
+    public void setStatusXe(int statusXe){
+        this.statusXe = statusXe;
+    }
+    public int getStatusXe(){
+        return statusXe;
+    }
     public void showMain(){
         main.setForm(new Form_Home());
         main.setVisible(true);
@@ -155,6 +171,7 @@ public class Main extends javax.swing.JFrame {
         main.dispose();
         statusBH = 0;
         statusKH = 0;
+        statusXe = 0;
         System.gc();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
