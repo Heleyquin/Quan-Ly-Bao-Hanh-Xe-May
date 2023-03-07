@@ -448,6 +448,14 @@ public class Form_KH extends javax.swing.JPanel {
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         // TODO add your handling code here:
+        maKHThem.setText(null);
+        cccdKH.setText(null);
+        hoKH.setText(null);
+        tenKH.setText(null);
+        ngaySinhKH.setDate(null);
+        sdtKh.setText(null);
+        mailKH.setText(null);
+        gioiKH.setSelectedIndex(0);
         ThemKH.setVisible(true);
     }//GEN-LAST:event_themActionPerformed
 

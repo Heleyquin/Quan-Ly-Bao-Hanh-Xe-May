@@ -589,7 +589,7 @@ public class connectSQL {
     }
     
     public ResultSet ds_tbh(){
-        String SQL = "SELECT MaTBH FROM TheBH WHERE DATEDIFF(DAY,GETDATE(), NgayHetHan) > 0 and DATEDIFF(DAY,GETDATE(), NgayBatDau) <= 0";
+        String SQL = "{call ds_tbh()}";
         Statement st;
         ResultSet rs = null;
         try {

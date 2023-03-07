@@ -53,6 +53,9 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         return id_xoa;
     }
 
+    public String getTBH(){
+        return tbh;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,27 +192,6 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        connectSQL conTBH = new connectSQL();
-        ResultSet reTBH = conTBH.ds_tbh();
-        try{
-            while(reTBH.next()){
-                chonTBH.addItem(reTBH.getString(1));
-            }
-            chonTBH.setSelectedIndex(0);
-        }catch(SQLException e){
-            System.out.println(e);
-        }
-        connectSQL conKH = new connectSQL();
-        ResultSet reKH;
-        reKH = conKH.ds_kh();
-        try{
-            while(reKH.next()){
-                maKH.addItem(reKH.getString(1));
-            }
-            maKH.setSelectedIndex(0);
-        }catch(SQLException e){
-            System.out.println(e);
-        }
         themNVNhan.setText(new com.raven.main.WelcomeJFrame().getTK());
 
         javax.swing.GroupLayout ThemPBHLayout = new javax.swing.GroupLayout(ThemPBH.getContentPane());
@@ -476,19 +458,56 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
     private void laptraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laptraActionPerformed
         // TODO add your handling code here:
         PhieuTra themphieu = new PhieuTra(tableMetro1);
+        themphieu.setLocationRelativeTo(null);
         themphieu.setVisible(true);
         themphieu.setMapn(id_xoa);
     }//GEN-LAST:event_laptraActionPerformed
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         // TODO add your handling code here:
+        connectSQL conTBH = new connectSQL();
+        ResultSet reTBH = conTBH.ds_tbh();
+        chonTBH.removeAllItems();
+        try {
+            while (reTBH.next()) {
+                chonTBH.addItem(reTBH.getString(1));
+            }
+            chonTBH.setSelectedIndex(0);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        maKH.removeAllItems();
+        ResultSet reKH;
+        reKH = conTBH.ds_kh();
+        try {
+            while (reKH.next()) {
+                maKH.addItem(reKH.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        tinhTrang.setText(null);
         ThemPBH.setVisible(true);
+        
         
     }//GEN-LAST:event_themActionPerformed
 
     private void suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaActionPerformed
         // TODO add your handling code here:
         NV_SUA_PBH_NHAN sua_pbh = new NV_SUA_PBH_NHAN(tableMetro1);
+        chonTBH.removeAllItems();
+//        connectSQL conTBH = new connectSQL();
+//        ResultSet reTBH = conTBH.ds_tbh();
+//        try {
+//            while (reTBH.next()) {
+//                chonTBH.addItem(reTBH.getString(1));
+//            }
+//
+//        } catch (SQLException ex) {
+//            System.out.println(ex);
+//        }
+//        chonTBH.addItem(tbh);
+//        chonTBH.setSelectedItem(tbh);
         sua_pbh.setVisible(true);
         sua_pbh.setLocationRelativeTo(null);
         sua_pbh.setMaNhan(id_xoa);

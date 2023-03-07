@@ -81,7 +81,6 @@ public class Xe extends javax.swing.JPanel {
 
         suaTTXe.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         suaTTXe.setModal(true);
-        suaTTXe.setPreferredSize(new java.awt.Dimension(801, 500));
         suaTTXe.setSize(new java.awt.Dimension(801, 480));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
@@ -197,7 +196,6 @@ public class Xe extends javax.swing.JPanel {
 
         themXe.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         themXe.setModal(true);
-        themXe.setPreferredSize(new java.awt.Dimension(744, 600));
         themXe.setSize(new java.awt.Dimension(744, 570));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
@@ -229,6 +227,15 @@ public class Xe extends javax.swing.JPanel {
             }
         });
         jPanel2.add(ds_model, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 97, 333, 50));
+        connectSQL conModel = new connectSQL();
+        ResultSet rs = conModel.ds_model();
+        try {
+            while (rs.next()) {
+                ds_model.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
 
         dsMauThem.setBackground(new java.awt.Color(255, 204, 204));
         dsMauThem.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -480,13 +487,12 @@ public class Xe extends javax.swing.JPanel {
         ResultSet rs;
         connectSQL conModel = new connectSQL();
         rs = conModel.ds_model();
-        try {
-            while (rs.next()) {
-                ds_model.addItem(rs.getString(1));
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        kxThem.setText(null);
+        ngayThem.setDate(null);
+        tbhThem.setText(null);
+        hanNgay.setDate(null);
+        ds_model.setSelectedIndex(0);
+        dsMauThem.setSelectedIndex(0);
         themXe.setVisible(true);
 
     }//GEN-LAST:event_themActionPerformed
@@ -554,6 +560,8 @@ public class Xe extends javax.swing.JPanel {
                     DefaultTableModel dt = (DefaultTableModel) tableXe.getModel();
                     dt.setRowCount(0);
                     insertXe();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Thất bại", "Không thành công", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }

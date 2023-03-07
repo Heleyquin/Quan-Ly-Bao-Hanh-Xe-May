@@ -788,6 +788,13 @@ public class NangCao extends javax.swing.JPanel {
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         // TODO add your handling code here:
+        manv.setText(null);
+        ho.setText(null);
+        ten.setText(null);
+        ngayS.setDate(null);
+        sdt.setText(null);
+        mail.setText(null);
+        gioi.setSelectedIndex(0);
         themnv.setVisible(true);
     }//GEN-LAST:event_themActionPerformed
 
@@ -824,10 +831,11 @@ public class NangCao extends javax.swing.JPanel {
             }
             if (matcher4.matches() && ngayS.getDate() != null && (matcher2.matches() || sdt.getText().equalsIgnoreCase("")) && (matcher3.matches() || mail.getText().equalsIgnoreCase(""))) {
                 connectSQL conn = new connectSQL();
-                int result = -1, themTk = -1, themQuyen = -1;
+                int result = -1, themTk = -1, themQuyen = -1, suaQuyen = -1;
                 result = conn.them_nv(manv.getText(), ho.getText(), ten.getText(), ngayS.getDate(), sdt.getText(), mail.getText(), clock1.getDate(), gioi.getSelectedItem().toString());
                 themTk = conn.them_tk(manv.getText());
-                themQuyen = conn.doi_quyen(manv.getText(), 2);
+//                suaQuyen = conn.doi_quyen(manv.getText(), 2);
+//                themQuyen = conn.doi_quyen(manv.getText(), 2);
                 if (result >0){
                     JOptionPane.showMessageDialog(null, "Thêm hoàn tất", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                     themnv.dispose();

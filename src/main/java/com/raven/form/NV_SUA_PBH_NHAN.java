@@ -182,6 +182,7 @@ public class NV_SUA_PBH_NHAN extends javax.swing.JFrame {
         }catch(SQLException ex){
             System.out.println(ex.toString());
         }
+        maTBH.addItem(new QuanLyBaoHanh().getTBH());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 

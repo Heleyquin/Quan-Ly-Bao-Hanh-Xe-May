@@ -183,7 +183,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="connectSQL conn = new connectSQL();&#xa;ResultSet rs = conn.ds_tbh();&#xa;try{&#xa;    while(rs.next()){&#xa;        maTBH.addItem(rs.getString(1));&#xa;    }&#xa;}catch(SQLException ex){&#xa;    System.out.println(ex.toString());&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="connectSQL conn = new connectSQL();&#xa;ResultSet rs = conn.ds_tbh();&#xa;try{&#xa;    while(rs.next()){&#xa;        maTBH.addItem(rs.getString(1));&#xa;    }&#xa;}catch(SQLException ex){&#xa;    System.out.println(ex.toString());&#xa;}&#xa;maTBH.addItem(new QuanLyBaoHanh().getTBH());"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
