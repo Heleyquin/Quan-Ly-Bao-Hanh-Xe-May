@@ -71,6 +71,7 @@ public class Xe extends javax.swing.JPanel {
         hanThem = new javax.swing.JLabel();
         hanNgay = new com.toedter.calendar.JDateChooser();
         hanSai = new javax.swing.JLabel();
+        thieuMau = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableXe = new rojerusan.RSTableMetro();
         sua = new rojeru_san.rsbutton.RSButtonRoundRipple();
@@ -283,6 +284,10 @@ public class Xe extends javax.swing.JPanel {
         hanSai.setForeground(new java.awt.Color(255, 0, 0));
         jPanel2.add(hanSai, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 440, 400, 20));
 
+        thieuMau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        thieuMau.setForeground(new java.awt.Color(255, 51, 51));
+        jPanel2.add(thieuMau, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 200, 10));
+
         javax.swing.GroupLayout themXeLayout = new javax.swing.GroupLayout(themXe.getContentPane());
         themXe.getContentPane().setLayout(themXeLayout);
         themXeLayout.setHorizontalGroup(
@@ -484,13 +489,11 @@ public class Xe extends javax.swing.JPanel {
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         // TODO add your handling code here:
-        ResultSet rs;
-        connectSQL conModel = new connectSQL();
-        rs = conModel.ds_model();
         kxThem.setText(null);
         ngayThem.setDate(null);
         tbhThem.setText(null);
         hanNgay.setDate(null);
+        thieuMau.setText(null);
         ds_model.setSelectedIndex(0);
         dsMauThem.setSelectedIndex(0);
         themXe.setVisible(true);
@@ -505,8 +508,15 @@ public class Xe extends javax.swing.JPanel {
         ResultSet ds = conn.ds_mau(maModel);
         try {
             listMau.removeAllItems();
+            int isHave = -1;
             while(ds.next()){
                 listMau.addItem(ds.getString(1));
+                if(ds.getString(1).equalsIgnoreCase(maMau)){
+                    isHave = 1;
+                }
+            }
+            if (isHave == -1){
+                listMau.addItem(maMau);
             }
             listMau.setSelectedItem(maMau);
         } catch (SQLException ex) {
@@ -532,26 +542,37 @@ public class Xe extends javax.swing.JPanel {
                 saiKX.setText(null);
                 saiTBH.setText(null);
                 hanSai.setText(null);
+                thieuMau.setText(null);
             }
             if(matcher1.matches() == false){
                 saiNgayThem.setText(null);
                 saiKX.setText("Mã khung xe phải là chuỗi dạng 'KXx' với x là 1 số");
                 saiTBH.setText(null);
                 hanSai.setText(null);
+                thieuMau.setText(null);
             }
             if(matcher2.matches() == false){
                 saiTBH.setText("Định dạng thẻ bảo hành không đúng, phải có dạng 'TBHx' x là số");
                 saiKX.setText(null);
                 saiNgayThem.setText(null);
                 hanSai.setText(null);
+                thieuMau.setText(null);
             }
             if (hanNgay.getDate() == null || (hanNgay.getDate().before(new Date()) == true)){
                 hanSai.setText("Hạn bảo hành không hợp lệ");
                 saiKX.setText(null);
                 saiNgayThem.setText(null);
-                saiTBH.setText(null);                
+                saiTBH.setText(null);          
+                thieuMau.setText(null);
             }
-            if(ngayThem.getDate() != null && matcher1.matches() == true && ngayThem.getDate().after(new Date()) == false && hanNgay.getDate().before(new Date()) == false){
+            if (dsMauThem.getSelectedItem() == null){
+                thieuMau.setText("Màu không dược để trống");
+                hanSai.setText(null);
+                saiKX.setText(null);
+                saiNgayThem.setText(null);
+                saiTBH.setText(null); 
+            }
+            if(dsMauThem.getSelectedItem() != null && ngayThem.getDate() != null && matcher1.matches() == true && ngayThem.getDate().after(new Date()) == false && hanNgay.getDate().before(new Date()) == false){
                 connectSQL conn = new connectSQL();
                 int result = conn.them_xe_tbh(kxThem.getText(), ds_model.getSelectedItem().toString(), ngayThem.getDate(), dsMauThem.getSelectedItem().toString(), tbhThem.getText(), hanNgay.getDate());
                 if (result > 0){
@@ -631,6 +652,7 @@ public class Xe extends javax.swing.JPanel {
     private javax.swing.JTextField tbhThem;
     private rojeru_san.rsbutton.RSButtonRoundRipple them;
     private javax.swing.JDialog themXe;
+    private javax.swing.JLabel thieuMau;
     private javax.swing.JButton xacNhan;
     private javax.swing.JButton xacnhan;
     // End of variables declaration//GEN-END:variables

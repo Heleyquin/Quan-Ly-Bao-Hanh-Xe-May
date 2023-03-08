@@ -8,9 +8,11 @@ import com.raven.form.Form_KH;
 import com.raven.form.Form_CTKH;
 import com.raven.form.Form_Home;
 import com.raven.form.JFrameExit;
+import com.raven.form.Model;
 import com.raven.form.NangCao;
 import com.raven.form.TBH;
 import com.raven.form.Xe;
+import com.raven.form.bangMau;
 import com.raven.form.doiPass;
 import com.raven.form.modelXe;
 import java.awt.Color;
@@ -22,10 +24,12 @@ public class Main extends javax.swing.JFrame {
     private Form_CTKH form22;
     private JFrameExit form5;
     private modelXe form33;
+    private bangMau form66; 
     static Main main = new Main();
     static int statusBH = 0;//Lưu trạng thai của form, 0 là Form QLBH, 1 là Form CTBH
     static int statusKH = 0;//0 ở Form_KhachHang, 1 ở Form CTKH
     static int statusXe = 0;//0 ở Xe, 1 ở Model
+    static int statusModel = 0;//0 ở model, 1 ở bảng màu
     public Main() {
         initComponents();
         this.setSize(1061, 690);
@@ -52,8 +56,6 @@ public class Main extends javax.swing.JFrame {
                     }
                     else if(main.getStatusKH() == 1){
                         form22 = new Form_CTKH();
-                        System.out.print("Mã là: ");
-                        System.out.println(form22.getMaKH());
                         form22.insertCTKH();
                         main.setForm(form22);
                     }
@@ -67,14 +69,23 @@ public class Main extends javax.swing.JFrame {
                 } else if(index == 4){
                     main.setForm(new TBH());
                 } else if(index == 5){
+                    if(main.getStatusModel() == 0){
+                        main.setForm(new Model());
+                    }else if(main.getStatusModel() == 1){
+                        form66 = new bangMau();
+                        form66.insertBangMau();
+                        main.setForm(form66);
+                    }
+                    
+                }else if(index == 6){
                     main.setForm(new doiPass());
-                } else if(index == 6){
+                } else if(index == 7){
                     if(new WelcomeJFrame().getQuyen() == 1){
                         main.setForm(new NangCao());
                     }else{
                         JOptionPane.showMessageDialog(null, "Bạn không có quyền này", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }    
-                } else if(index == 8){
+                } else if(index == 9){
                     form5.setVisible(true);
                 }
             }
@@ -137,6 +148,12 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setStatusModel(int statusModel){
+        this.statusModel = statusModel;
+    }
+    public int getStatusModel(){
+        return statusModel;
+    }
     public int getStatusBH(){
         return statusBH;
     }
@@ -172,6 +189,7 @@ public class Main extends javax.swing.JFrame {
         statusBH = 0;
         statusKH = 0;
         statusXe = 0;
+        statusModel = 0;
         System.gc();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -22,7 +22,7 @@ import java.util.regex.*;
 
 
 public class CTBH_JPanel extends javax.swing.JPanel {
-    private static final String regexGia = "[1-9]\\d*";
+    private static final String regexGia = "[1-9]\\d{0,}$";
     private final static Pattern patternGia = Pattern.compile(regexGia);
     public CTBH_JPanel() {
         initComponents();
@@ -312,7 +312,7 @@ public class CTBH_JPanel extends javax.swing.JPanel {
             if (matcher1.matches() == false && (chiPhiThem.getText().isEmpty() == false )){
                 saiGia.setText("Giá tiền không hợp lệ");
                 saiMota.setText(null);
-            }if(moTaThem.getText().isEmpty() == false && (matcher1.matches() == false || chiPhiThem.getText().isEmpty() == true)){
+            }if(moTaThem.getText().isEmpty() == false && (matcher1.matches() == true || chiPhiThem.getText().isEmpty() == true)){
             saiGia.setText(null);
             saiMota.setText(null);
             String id_nhan = phieunhan.getText();

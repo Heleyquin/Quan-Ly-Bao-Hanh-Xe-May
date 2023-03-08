@@ -25,9 +25,11 @@ public class NangCao extends javax.swing.JPanel {
     private final static String regexSDT = "0\\d{9}";
     private final static String regexMail = "[A-Za-z0-9]+@gmail\\.com";
     private final static String regexMaNV = "(NV\\d{1,8})";
+    private final static String regexTen = "\\p{L}{1,}\\p{Zs}{0,}\\p{L}{0,}";
     private final static Pattern pattern1SDT = Pattern.compile(regexSDT);
     private final static Pattern pattern1Mail = Pattern.compile(regexMail);
     private final static Pattern pattern1MaKH = Pattern.compile(regexMaNV);
+    private final static Pattern patternTen = Pattern.compile(regexTen);
     
     
     private static int quyen;
@@ -87,6 +89,10 @@ public class NangCao extends javax.swing.JPanel {
         saiNgay = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         gioi = new javax.swing.JComboBox<>();
+        saiHoThem = new javax.swing.JLabel();
+        saiTenThem = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        quyenThem = new javax.swing.JComboBox<>();
         suaNV = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -105,6 +111,8 @@ public class NangCao extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         ngaySinhSua = new com.toedter.calendar.JDateChooser();
         saiNgaySinhSua = new javax.swing.JLabel();
+        hoSai = new javax.swing.JLabel();
+        tenSai = new javax.swing.JLabel();
         suaPass = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -316,24 +324,46 @@ public class NangCao extends javax.swing.JPanel {
         ngayS.setDateFormatString("yyyy-MM-dd");
         ngayS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel2.add(ngayS, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 371, 39));
+
+        saiMaNV.setForeground(new java.awt.Color(255, 0, 0));
         jPanel2.add(saiMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 192, 20));
-        jPanel2.add(saiMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 430, 190, 20));
+
+        saiMail.setForeground(new java.awt.Color(255, 51, 51));
+        jPanel2.add(saiMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 430, 220, 20));
 
         saiSDT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saiSDT.setForeground(new java.awt.Color(255, 51, 51));
-        jPanel2.add(saiSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 200, 20));
+        jPanel2.add(saiSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 230, 20));
 
         saiNgay.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saiNgay.setForeground(new java.awt.Color(255, 51, 0));
-        jPanel2.add(saiNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, 170, 20));
+        jPanel2.add(saiNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 230, 20));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Giới:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 210, 40));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, 90, 40));
 
         gioi.setBackground(new java.awt.Color(204, 153, 255));
         gioi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        jPanel2.add(gioi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 150, 40));
+        jPanel2.add(gioi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 150, 40));
+
+        saiHoThem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saiHoThem.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel2.add(saiHoThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 220, 20));
+
+        saiTenThem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saiTenThem.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel2.add(saiTenThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 210, 20));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel22.setText("Quyền");
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 460, 70, 40));
+
+        quyenThem.setBackground(new java.awt.Color(255, 204, 102));
+        quyenThem.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        quyenThem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản trị", "Nhân viên" }));
+        quyenThem.setSelectedIndex(1);
+        jPanel2.add(quyenThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, 140, 40));
 
         javax.swing.GroupLayout themnvLayout = new javax.swing.GroupLayout(themnv.getContentPane());
         themnv.getContentPane().setLayout(themnvLayout);
@@ -416,6 +446,14 @@ public class NangCao extends javax.swing.JPanel {
         saiNgaySinhSua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saiNgaySinhSua.setForeground(new java.awt.Color(255, 51, 51));
         jPanel3.add(saiNgaySinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 490, 160, 20));
+
+        hoSai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        hoSai.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel3.add(hoSai, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 180, 20));
+
+        tenSai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tenSai.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel3.add(tenSai, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 180, 20));
 
         javax.swing.GroupLayout suaNVLayout = new javax.swing.GroupLayout(suaNV.getContentPane());
         suaNV.getContentPane().setLayout(suaNVLayout);
@@ -788,6 +826,12 @@ public class NangCao extends javax.swing.JPanel {
 
     private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
         // TODO add your handling code here:
+        saiSDT.setText(null);
+        saiMail.setText(null);
+        saiNgay.setText(null);
+        saiMaNV.setText(null);
+        saiHoThem.setText(null);
+        saiTenThem.setText(null);
         manv.setText(null);
         ho.setText(null);
         ten.setText(null);
@@ -805,37 +849,62 @@ public class NangCao extends javax.swing.JPanel {
             Matcher matcher2 = pattern1SDT.matcher(sdt.getText());
             Matcher matcher3 = pattern1Mail.matcher(mail.getText());
             Matcher matcher4 = pattern1MaKH.matcher(manv.getText());
-            if(ngayS.getDate() == null){
+            Matcher matcher5 = patternTen.matcher(ho.getText());
+            Matcher matcher6 = patternTen.matcher(ten.getText());
+            if (matcher5.matches() == false){
+                saiTenThem.setText(null);
+                saiHoThem.setText("Sai định dạng");
+                saiMaNV.setText(null);
+                saiSDT.setText(null);
+                saiMail.setText(null);
+                saiNgay.setText(null);
+            }
+            if (matcher6.matches() == false){
+                saiTenThem.setText("Sai định dạng");
+                saiHoThem.setText(null);
+                saiMaNV.setText(null);
+                saiSDT.setText(null);
+                saiMail.setText(null);
+                saiNgay.setText(null);
+            }
+            if(ngayS.getDate() == null || ngayS.getDate().after(new Date())){
                 saiNgay.setText("Nhập sai đinh dạng ngày, định dạng là 'Năm-Tháng-Ngày'");
                 saiSDT.setText(null);
                 saiMail.setText(null);
                 saiMaNV.setText(null);
+                saiHoThem.setText(null);
+                saiTenThem.setText(null);
             }
             if (matcher4.matches() == false) {
                 saiMaNV.setText("Nhập mã nhân viên không đúng định dạng, phải có dạng 'NVc' với c là 1 số");
                 saiSDT.setText(null);
                 saiMail.setText(null);
                 saiNgay.setText(null);
+                saiHoThem.setText(null);
+                saiTenThem.setText(null);
             }
             if (matcher2.matches() == false && sdt.getText().equalsIgnoreCase("") == false) {
                 saiMaNV.setText(null);
                 saiSDT.setText("Nhập sai định dạng SĐT");
                 saiMail.setText(null);
                 saiNgay.setText(null);
+                saiHoThem.setText(null);
+                saiTenThem.setText(null);
             }
             if (matcher3.matches() == false && mail.getText().equalsIgnoreCase("") == false) {
                 saiSDT.setText(null);
                 saiMail.setText("Nhập sai định dạng email");
                 saiNgay.setText(null);
                 saiMaNV.setText(null);
+                saiHoThem.setText(null);
+                saiTenThem.setText(null);
             }
-            if (matcher4.matches() && ngayS.getDate() != null && (matcher2.matches() || sdt.getText().equalsIgnoreCase("")) && (matcher3.matches() || mail.getText().equalsIgnoreCase(""))) {
+            if (ngayS.getDate().before(new Date()) && matcher5.matches() && matcher6.matches() && matcher4.matches() && ngayS.getDate() != null && (matcher2.matches() || sdt.getText().equalsIgnoreCase("")) && (matcher3.matches() || mail.getText().equalsIgnoreCase(""))) {
                 connectSQL conn = new connectSQL();
-                int result = -1, themTk = -1, themQuyen = -1, suaQuyen = -1;
+                int result = -1, themTk = -1, themQuyen = -1;
                 result = conn.them_nv(manv.getText(), ho.getText(), ten.getText(), ngayS.getDate(), sdt.getText(), mail.getText(), clock1.getDate(), gioi.getSelectedItem().toString());
                 themTk = conn.them_tk(manv.getText());
-//                suaQuyen = conn.doi_quyen(manv.getText(), 2);
-//                themQuyen = conn.doi_quyen(manv.getText(), 2);
+                themQuyen = conn.doi_quyen(manv.getText(), quyenThem.getSelectedIndex()+1);
                 if (result >0){
                     JOptionPane.showMessageDialog(null, "Thêm hoàn tất", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                     themnv.dispose();
@@ -851,6 +920,11 @@ public class NangCao extends javax.swing.JPanel {
 
     private void suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaActionPerformed
         // TODO add your handling code here:
+        hoSai.setText(null);
+        tenSai.setText(null);
+        sdtSuaSai.setText(null);
+        mailSuaSai.setText(null);
+        saiNgaySinhSua.setText(null);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(ngaySStr);
@@ -886,22 +960,44 @@ public class NangCao extends javax.swing.JPanel {
         if (dialogResult == JOptionPane.YES_OPTION) {
             Matcher matcher2 = pattern1SDT.matcher(sdtSua.getText());
             Matcher matcher3 = pattern1Mail.matcher(mailSua.getText());
-            if (ngaySinhSua.getDate() == null){
+            Matcher matcher4 = patternTen.matcher(hoSua.getText());
+            Matcher matcher5 = patternTen.matcher(tenSua.getText());
+            if (matcher4.matches() == false){
+                hoSai.setText("Nhập sai định dạng");
+                tenSai.setText(null);
+                sdtSuaSai.setText(null);
+                mailSuaSai.setText(null);
+                saiNgaySinhSua.setText(null);
+            }
+            if (matcher5.matches() == false){
+                hoSai.setText("Sai định dạng");
+                tenSai.setText(null);
+                sdtSuaSai.setText(null);
+                mailSuaSai.setText(null);
+                saiNgaySinhSua.setText(null);
+            }
+            if (ngaySinhSua.getDate() == null || ngaySinhSua.getDate().after(new Date())){
                 saiNgaySinhSua.setText("Sai định dạng ngày!!!");
                 sdtSuaSai.setText(null);
                 mailSuaSai.setText(null);
+                hoSai.setText(null);
+                tenSai.setText(null);
             }
             if(matcher2.matches() == false && sdtSua.getText().equalsIgnoreCase("") == false){
                 saiNgaySinhSua.setText(null);
                 sdtSuaSai.setText("Nhập sai định dạng sđt");
                 mailSuaSai.setText(null);
+                hoSai.setText(null);
+                tenSai.setText(null);
             }
             if(matcher3.matches() == false && mailSua.getText().equalsIgnoreCase("") == false){
                 sdtSuaSai.setText(null);
                 mailSuaSai.setText("Sai định dạng email");
                 saiNgaySinhSua.setText(null);
+                hoSai.setText(null);
+                tenSai.setText(null);
             }
-            if(ngaySinhSua.getDate() != null && (matcher2.matches() || sdtSua.getText().equalsIgnoreCase("")) && (matcher3.matches() || mailSua.getText().equalsIgnoreCase(""))){
+            if(ngaySinhSua.getDate().after(new Date()) == false && matcher4.matches() && matcher5.matches() && ngaySinhSua.getDate() != null && (matcher2.matches() || sdtSua.getText().equalsIgnoreCase("")) && (matcher3.matches() || mailSua.getText().equalsIgnoreCase(""))){
                 connectSQL conn = new connectSQL();
                 int result = conn.sua_nv(maNVStr, hoSua.getText(), tenSua.getText(), sdtSua.getText(), mailSua.getText(), gioiSua.getSelectedItem().toString(), ngaySinhSua.getDate());
                 if (result > 0){
@@ -1066,6 +1162,7 @@ public class NangCao extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> gioi;
     private javax.swing.JComboBox<String> gioiSua;
     private javax.swing.JTextField ho;
+    private javax.swing.JLabel hoSai;
     private javax.swing.JTextField hoSua;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -1082,6 +1179,7 @@ public class NangCao extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1107,11 +1205,14 @@ public class NangCao extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser ngaySinhSua;
     private javax.swing.JButton passConfirm;
     private javax.swing.JLabel phanCap;
+    private javax.swing.JComboBox<String> quyenThem;
+    private javax.swing.JLabel saiHoThem;
     private javax.swing.JLabel saiMaNV;
     private javax.swing.JLabel saiMail;
     private javax.swing.JLabel saiNgay;
     private javax.swing.JLabel saiNgaySinhSua;
     private javax.swing.JLabel saiSDT;
+    private javax.swing.JLabel saiTenThem;
     private javax.swing.JTextField sdt;
     private javax.swing.JTextField sdtSua;
     private javax.swing.JLabel sdtSuaSai;
@@ -1125,6 +1226,7 @@ public class NangCao extends javax.swing.JPanel {
     private javax.swing.JTable tableNhanVien;
     private javax.swing.JDialog taiKhoan;
     private javax.swing.JTextField ten;
+    private javax.swing.JLabel tenSai;
     private javax.swing.JTextField tenSua;
     private javax.swing.JLabel tentk;
     private javax.swing.JButton them;

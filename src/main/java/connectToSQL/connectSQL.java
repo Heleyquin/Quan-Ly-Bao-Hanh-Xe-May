@@ -108,6 +108,94 @@ public class connectSQL {
         return result;
     }
     
+    public ResultSet bang_mau_model(String model){
+        String SQL = "{call bang_mau_model(?)}";
+        CallableStatement cs;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, model);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public ResultSet mau_chua_co(String model){
+        String SQL = "{call mau_chua_co(?)}";
+        CallableStatement st;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareCall(SQL);
+            st.setString(1, model);
+            rs = st.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return rs;
+    }
+    
+    public int xoa_mau_model(String mau){
+        String SQL = "{call xoa_mau_model(?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, Integer.parseInt(mau));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int doi_tt_mau(String mau, String tt){
+        String SQL = "{call doi_tt_mau(?,?)}";
+        CallableStatement cs;
+        int result =  0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, Integer.parseInt(mau));
+            cs.setInt(2, Integer.parseInt(tt));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int co_the_xoa_mau_model(String ma){
+        String SQL = "{call co_the_xoa_mau_model(?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setInt(1, Integer.parseInt(ma));
+            ResultSet rs = cs.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int them_mau_model(String ma, String mau){
+        String SQL = "{call them_mau_model(?,?)}";
+        CallableStatement cs;
+        int result =  0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, ma);
+            cs.setInt(2, Integer.parseInt(mau));
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
     public ResultSet ds_mau(String model){
         String SQL = "{call ds_mau(?)}";
         ResultSet rs = null;
@@ -152,6 +240,7 @@ public class connectSQL {
         return rs;
     }
     
+    
     public ResultSet ds_kh(){
         String SQL = "SELECT * FROM KhachHang";
         Statement st;
@@ -163,6 +252,63 @@ public class connectSQL {
             System.out.println(ex.toString());
         }
         return rs;
+    }
+    
+    public int xoa_mdel(String model){
+        String SQL = "{call xoa_model(?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, model);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int co_the_xoa_model(String model){
+        String SQL = "{call co_the_xoa_model(?)}";
+        CallableStatement cs;
+        ResultSet rs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1,model);
+            rs = cs.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
+    }
+    
+    public int sua_model(String model, String loai, String khoiLuong, String dai, String rong, String cao, String xang, String dongCo, String ten){
+        String SQL = "{call sua_model(?,?,?,?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, model);
+            cs.setString(2, loai);
+            cs.setString(3, khoiLuong);
+            cs.setString(4, dai);
+            cs.setString(5, rong);
+            cs.setString(6, cao);
+            cs.setString(7, xang);
+            if(dongCo.equalsIgnoreCase("null") || dongCo.isEmpty()){
+                cs.setNull(8, java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(8, dongCo);
+            }
+            cs.setString(9, ten);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return result;
     }
     
     public ResultSet sp_ct_kh(String makh){
@@ -179,8 +325,34 @@ public class connectSQL {
         return rs;
     }
     
+    public int them_model(String model, String loai, String khoiLuong, String dai, String rong, String cao, String xang, String dongCo, String ten){
+        String SQL = "{call them_model(?,?,?,?,?,?,?,?,?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, model);
+            cs.setString(2, loai);
+            cs.setString(3, khoiLuong);
+            cs.setString(4, dai);
+            cs.setString(5, rong);
+            cs.setString(6, cao);
+            cs.setString(7,xang);
+            if(dongCo.equalsIgnoreCase("null") || dongCo.isEmpty()){
+                cs.setNull(8, java.sql.Types.VARCHAR);
+            }else{
+                cs.setString(8, dongCo);
+            }
+            cs.setString(9, ten);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public ResultSet ds_model(){
-        String SQL = "SELECT MaModel FROM Model";
+        String SQL = "SELECT * FROM Model";
         ResultSet rs = null;
         try {
             Statement st = conn.createStatement();

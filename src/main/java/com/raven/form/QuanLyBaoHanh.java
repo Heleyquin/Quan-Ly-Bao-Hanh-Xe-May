@@ -85,7 +85,6 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         sua = new javax.swing.JButton();
 
         ThemPBH.setModal(true);
-        ThemPBH.setPreferredSize(new java.awt.Dimension(815, 460));
         ThemPBH.setResizable(false);
         ThemPBH.setSize(new java.awt.Dimension(815, 460));
 
@@ -496,18 +495,6 @@ public class QuanLyBaoHanh extends javax.swing.JPanel {
         // TODO add your handling code here:
         NV_SUA_PBH_NHAN sua_pbh = new NV_SUA_PBH_NHAN(tableMetro1);
         chonTBH.removeAllItems();
-//        connectSQL conTBH = new connectSQL();
-//        ResultSet reTBH = conTBH.ds_tbh();
-//        try {
-//            while (reTBH.next()) {
-//                chonTBH.addItem(reTBH.getString(1));
-//            }
-//
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//        }
-//        chonTBH.addItem(tbh);
-//        chonTBH.setSelectedItem(tbh);
         sua_pbh.setVisible(true);
         sua_pbh.setLocationRelativeTo(null);
         sua_pbh.setMaNhan(id_xoa);

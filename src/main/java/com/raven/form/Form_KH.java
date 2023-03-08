@@ -392,7 +392,7 @@ public class Form_KH extends javax.swing.JPanel {
                 saiSDT.setText(null);
                 saiMail.setText(null);
             }
-            if (ngaySinhKH.getDate() == null) {
+            if (ngaySinhKH.getDate() == null || ngaySinhKH.getDate().after(new Date()) == true) {
                 saiNgay.setText("Nhập sai đinh dạng ngày, định dạng là 'Năm-Tháng-Ngày'");
                 saiKH.setText(null);
                 saiCCCD.setText(null);
@@ -420,7 +420,7 @@ public class Form_KH extends javax.swing.JPanel {
                 saiNgay.setText(null);
                 saiKH.setText(null);
             }
-            if (matcher4.matches() && ngaySinhKH.getDate() != null && matcher1.matches() && (matcher2.matches() || sdtKh.getText().equalsIgnoreCase("")) && (matcher3.matches() || mailKH.getText().equalsIgnoreCase(""))) {
+            if (ngaySinhKH.getDate().after(new Date()) == false && matcher4.matches() && ngaySinhKH.getDate() != null && matcher1.matches() && (matcher2.matches() || sdtKh.getText().equalsIgnoreCase("")) && (matcher3.matches() || mailKH.getText().equalsIgnoreCase(""))) {
                 connectSQL conn = new connectSQL();
                 String maKH = maKHThem.getText();
                 String StrCCCD = cccdKH.getText();
