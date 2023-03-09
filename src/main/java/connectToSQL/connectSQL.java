@@ -150,6 +150,20 @@ public class connectSQL {
         return result;
     }
     
+    public int them_mau_sac(String ten){
+        String SQL = "{call them_mau_sac(?)}";
+        CallableStatement cs;
+        int result = 0;
+        try {
+            cs = conn.prepareCall(SQL);
+            cs.setString(1, ten);
+            result = cs.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(connectSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public int doi_tt_mau(String mau, String tt){
         String SQL = "{call doi_tt_mau(?,?)}";
         CallableStatement cs;
